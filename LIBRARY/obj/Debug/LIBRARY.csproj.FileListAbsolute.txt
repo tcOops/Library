@@ -1,0 +1,27 @@
+C:\Users\tcOops\Desktop\lib\LIBRARY\LIBRARY\bin\LIBRARY.dll.config
+C:\Users\tcOops\Desktop\lib\LIBRARY\LIBRARY\bin\LIBRARY.dll
+C:\Users\tcOops\Desktop\lib\LIBRARY\LIBRARY\bin\LIBRARY.pdb
+C:\Users\tcOops\Desktop\lib\LIBRARY\LIBRARY\obj\Debug\LIBRARY.csprojResolveAssemblyReference.cache
+C:\Users\tcOops\Desktop\lib\LIBRARY\LIBRARY\obj\Debug\LIBRARY.dll
+C:\Users\tcOops\Desktop\lib\LIBRARY\LIBRARY\obj\Debug\LIBRARY.pdb
+C:\Users\tcOops\Desktop\lib\LIBRARY\LIBRARY\bin\MySql.Data.dll
+C:\Users\tcOops\Desktop\library\LIBRARY\bin\LIBRARY.dll.config
+C:\Users\tcOops\Desktop\library\LIBRARY\bin\LIBRARY.dll
+C:\Users\tcOops\Desktop\library\LIBRARY\bin\LIBRARY.pdb
+C:\Users\tcOops\Desktop\library\LIBRARY\bin\MySql.Data.dll
+C:\Users\tcOops\Desktop\library\LIBRARY\obj\Debug\LIBRARY.csprojResolveAssemblyReference.cache
+C:\Users\tcOops\Desktop\library\LIBRARY\obj\Debug\LIBRARY.dll
+C:\Users\tcOops\Desktop\library\LIBRARY\obj\Debug\LIBRARY.pdb
+C:\Users\Administrator\Desktop\library\LIBRARY\bin\LIBRARY.dll.config
+C:\Users\Administrator\Desktop\library\LIBRARY\bin\LIBRARY.dll
+C:\Users\Administrator\Desktop\library\LIBRARY\bin\LIBRARY.pdb
+C:\Users\Administrator\Desktop\library\LIBRARY\bin\MySql.Data.dll
+C:\Users\Administrator\Desktop\library\LIBRARY\obj\Debug\LIBRARY.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\library\LIBRARY\obj\Debug\LIBRARY.dll
+C:\Users\Administrator\Desktop\library\LIBRARY\obj\Debug\LIBRARY.pdb
+C:\Users\Administrator\Desktop\library - 副本\LIBRARY\bin\LIBRARY.dll.config
+C:\Users\Administrator\Desktop\library - 副本\LIBRARY\bin\LIBRARY.dll
+C:\Users\Administrator\Desktop\library - 副本\LIBRARY\bin\LIBRARY.pdb
+C:\Users\Administrator\Desktop\library - 副本\LIBRARY\obj\Debug\LIBRARY.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\library - 副本\LIBRARY\obj\Debug\LIBRARY.dll
+C:\Users\Administrator\Desktop\library - 副本\LIBRARY\obj\Debug\LIBRARY.pdb
