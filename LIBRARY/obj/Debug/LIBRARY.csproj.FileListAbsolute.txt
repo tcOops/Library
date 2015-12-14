@@ -15,7 +15,6 @@ C:\Users\tcOops\Desktop\library\LIBRARY\obj\Debug\LIBRARY.pdb
 C:\Users\Administrator\Desktop\library\LIBRARY\bin\LIBRARY.dll.config
 C:\Users\Administrator\Desktop\library\LIBRARY\bin\LIBRARY.dll
 C:\Users\Administrator\Desktop\library\LIBRARY\bin\LIBRARY.pdb
-C:\Users\Administrator\Desktop\library\LIBRARY\bin\MySql.Data.dll
 C:\Users\Administrator\Desktop\library\LIBRARY\obj\Debug\LIBRARY.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\library\LIBRARY\obj\Debug\LIBRARY.dll
 C:\Users\Administrator\Desktop\library\LIBRARY\obj\Debug\LIBRARY.pdb

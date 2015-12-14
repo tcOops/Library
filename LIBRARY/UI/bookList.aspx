@@ -25,6 +25,7 @@
 		<div class="col-md-2 column" style="background:rgba(198, 190, 204, 1)">
 					<div class="sidebar-tab-active"><a href="readerList.aspx">读者管理</a></div>
 					<div class="sidebar-tab"><a href="bookList.aspx">图书管理</a></div>
+                    <div class="sidebar-tab"><a href="demo.aspx">演示功能</a></div>
 		</div>
 		<div class="col-md-10 column">
 		<h3>图书列表</h3>
