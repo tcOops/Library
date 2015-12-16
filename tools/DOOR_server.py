@@ -6,10 +6,11 @@ from SocketServer import StreamRequestHandler as HD
 import threading, logging
 import time, os
 import MySQLdb
+import subprocess
 log_file_path = os.getcwd()
 
 host = 'localhost'
-port = 2333
+port = 8000
 
 class Server(HD):
     def handle(self):
@@ -24,17 +25,28 @@ class Server(HD):
 
             response = 'ok'
             self.request.send(response)
-            pieces = data.split(';')
-            print "Round{0}, the received data is {1}".format(str(cnt), pieces)
+            pieces = data.split('\t')
+            print "Round {0}:   The received data is {1}\n\n".format(str(cnt), pieces)
             cnt += 1
+            data = '''ip=192.168.1.1\ttime=2013-12-28 10:04:18\tpin=0\tcardno=CBCA937E000104E0\teventaddr=1\t
+                    event=27E\tinoutstatus=0\tverifytype=4'''
+
+            action, actionDate, signalCode, doorIp, generateDate, isDeleted = ['']*6
             for each in pieces:
                 if not each: break
-                ip_port, signal_code = each.split()
-                ip, port = ip_port.split(':')
-                print ip_port, signal_code
-                now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
-                sql = "insert into rfidrecord(action_date, signal_code, ip, is_deleted) values('{0}', '{1}', '{2}', {3})".format(now, signal_code, ip, '0')
-                pushDb.push(sql)
+                key, val = each.split('=')
+                if key == 'time':
+                    actionDate = val
+                if key == 'cardno':
+                    signalCode = val
+                if key == 'inoutstatus':
+                    action = 'open' if val=='0' else 'close'
+                if key == 'ip':
+                    doorIp = val
+
+                generateDate = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
+            sql = "insert into doorrecord(action, action_date, signal_code, door_ip, generate_date, is_deleted) values('{0}', '{1}', '{2}', {3})".format(action, action_date, signal_code, doorIp, generateDate, '0')
+            pushDb.push(sql)
 
         pushDb.db.close()
 

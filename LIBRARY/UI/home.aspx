@@ -11,7 +11,7 @@
  <body bgcolor="black">
 
   <style type="text/css">
-        h1 {color:white}
+        h1 {color:black}
   </style> 
 
   <div align="center" valign="middle">

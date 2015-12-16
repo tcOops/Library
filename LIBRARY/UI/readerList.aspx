@@ -64,7 +64,7 @@
 				<td style="width:25%;border-width:0px;text-align:center"><%=reader.Student_card_number%></td>
 				<td style="width:10%;border-width:0px;text-align:center"><%=reader.Role_id%></td>
 				<td style="width:12%;border-width:0px;text-align:center"><%=reader.Reader_status%></td>
-				<form action="index.aspx" method='post'>
+				<form action="readerList.aspx" method='post'>
 					<input style="display:none;" id="nodeIdRes" name="nodeIdRes" value="<%=reader.Id%>" />
 					<td style="width:8%;border-width:0px;font-weight:bold;text-align:center"><input type='submit' value="删除" class="selectNode"/></td>
 				</form>

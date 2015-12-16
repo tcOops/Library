@@ -2,7 +2,7 @@ from socket import *
 import time
 
 host = "localhost"
-port = 2333
+port = 8000
 
 if __name__ == '__main__':
     bufsize = 1024
@@ -13,7 +13,8 @@ if __name__ == '__main__':
 
     cnt = 0
     while True:
-        data = "192.168.2.190:10010 CBCA937E000104E0;"
+        data = '''time=2013-12-28 10:04:18\tpin=0\tcardno=CBCA937E000104E0\teventaddr=1\t
+                event=27E\tinoutstatus=0\tverifytype=4'''
         cnt += 1
         if not data or data=='exit':
             break
