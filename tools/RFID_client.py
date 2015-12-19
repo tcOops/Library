@@ -1,8 +1,8 @@
 from socket import *
 import time
 
-host = "localhost"
-port = 2333
+host = "192.168.1.15"
+port = 1001
 
 if __name__ == '__main__':
     bufsize = 1024

@@ -1,7 +1,7 @@
 from socket import *
 import time
 
-host = "localhost"
+host = "192.168.1.111"
 port = 8000
 
 if __name__ == '__main__':

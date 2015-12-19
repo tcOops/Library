@@ -8,33 +8,46 @@ import time, os
 import MySQLdb
 log_file_path = os.getcwd()
 
-host = 'localhost'
-port = 2333
+host = '192.168.1.111'
+port = 1001
+
+ipList = {
+    '11' : '192.168.1.190'
+}
 
 class Server(HD):
     def handle(self):
         pushDb = pushDB()
         print "waiting for connection"
+        dataSplit = ''
         cnt = 1
         while True:
             data = self.request.recv(1024)
             if not data:
                 break
-            print data
+            #print data
 
             response = 'ok'
             self.request.send(response)
             pieces = data.split(';')
             print "Round{0}, the received data is {1}".format(str(cnt), pieces)
-            cnt += 1
-            for each in pieces:
-                if not each: break
-                ip_port, signal_code = each.split()
-                ip, port = ip_port.split(':')
-                print ip_port, signal_code
-                now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
-                sql = "insert into rfidrecord(action_date, signal_code, ip, is_deleted) values('{0}', '{1}', '{2}', {3})".format(now, signal_code, ip, '0')
-                pushDb.push(sql)
+
+            dataSplit += data
+
+            if len(pieces) > 1:
+                print '-----------!!!!!!!!!!!'
+                print dataSplit
+                print '-----------!!!!!!!!!!!'
+                print ''
+                cnt += 1
+                for each in dataSplit.split(";"):
+                    if not each: break
+                    ip_port, signal_code = each.split(',')
+                    ip = ipList[ip_port]
+                    now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
+                    sql = "insert into rfidrecord(action_date, signal_code, ip, is_deleted) values('{0}', '{1}', '{2}', {3})".format(now, signal_code, ip, '0')
+                    pushDb.push(sql)
+                dataSplit = ''
 
         pushDb.db.close()
 
