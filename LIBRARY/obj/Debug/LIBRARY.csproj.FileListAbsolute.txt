@@ -8,7 +8,6 @@ C:\Users\tcOops\Desktop\lib\LIBRARY\LIBRARY\bin\MySql.Data.dll
 C:\Users\tcOops\Desktop\library\LIBRARY\bin\LIBRARY.dll.config
 C:\Users\tcOops\Desktop\library\LIBRARY\bin\LIBRARY.dll
 C:\Users\tcOops\Desktop\library\LIBRARY\bin\LIBRARY.pdb
-C:\Users\tcOops\Desktop\library\LIBRARY\bin\MySql.Data.dll
 C:\Users\tcOops\Desktop\library\LIBRARY\obj\Debug\LIBRARY.csprojResolveAssemblyReference.cache
 C:\Users\tcOops\Desktop\library\LIBRARY\obj\Debug\LIBRARY.dll
 C:\Users\tcOops\Desktop\library\LIBRARY\obj\Debug\LIBRARY.pdb

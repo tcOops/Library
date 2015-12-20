@@ -49,7 +49,7 @@ namespace LIBRARY.Models
             set;
         }
 
-        public DateTime Publish_date
+        public string Publish_date
         {
             get;
             set;

@@ -61,8 +61,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="static\js\demo.js" />
     <Content Include="static\js\jQuery.js" />
+    <Content Include="UI\addBook.aspx" />
     <Content Include="UI\addReader.aspx" />
+    <Content Include="UI\ajax.aspx" />
     <Content Include="UI\bookList.aspx" />
     <Content Include="UI\demo.aspx" />
     <Content Include="UI\home.aspx" />
@@ -74,7 +77,10 @@
     <Compile Include="BLL\AdminBLL.cs" />
     <Compile Include="DAL\AdminDAL.cs" />
     <Compile Include="DAL\bookDAL.cs" />
+    <Compile Include="DAL\CirculationDAL.cs" />
+    <Compile Include="DAL\DoorDAL.cs" />
     <Compile Include="DAL\ReaderDAL.cs" />
+    <Compile Include="DAL\RfidDAL.cs" />
     <Compile Include="Models\admin.cs" />
     <Compile Include="Models\book.cs" />
     <Compile Include="Models\bookstoreLocation.cs" />
@@ -87,12 +93,26 @@
     <Compile Include="Models\RFIDRecord.cs" />
     <Compile Include="Models\school.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\addBook.aspx.cs">
+      <DependentUpon>addBook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\addBook.aspx.designer.cs">
+      <DependentUpon>addBook.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI\addReader.aspx.cs">
       <DependentUpon>addReader.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UI\addReader.aspx.designer.cs">
       <DependentUpon>addReader.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ajax.aspx.cs">
+      <DependentUpon>ajax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\ajax.aspx.designer.cs">
+      <DependentUpon>ajax.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\bookList.aspx.cs">
       <DependentUpon>bookList.aspx</DependentUpon>

@@ -34,9 +34,9 @@ namespace LIBRARY.DAL
                     book.Author = Convert.ToString(dr["author"]);
                     book.Publisher_name = Convert.ToString(dr["publisher_name"]);
                     book.Publisher_id = Convert.ToInt32(dr["publisher_id"]);
-                    book.Publish_date= Convert.ToDateTime(dr["publish_date"]);
+                    book.Publish_date = Convert.ToString(dr["publish_date"]);
                     book.Price = Convert.ToInt32(dr["price"]);
-                    book.Language= Convert.ToString(dr["language"]);
+                    book.Language = Convert.ToString(dr["language"]);
                     book.Status = Convert.ToString(dr["status"]);
                     book.Location_id = Convert.ToInt32(dr["location_id"]);
                     book.Is_deleted = Convert.ToBoolean(dr["is_deleted"]);
@@ -56,31 +56,33 @@ namespace LIBRARY.DAL
             return bookList;
         }
 
+
         public bool addBook(Dictionary<string, string> kv)
         {
-            SqlParameter[] paras =
+            MySqlParameter[] paras =
             {
-                     new SqlParameter("?ISBN", kv["ISBN"]),
-                     new SqlParameter("?Signal_code", kv["Signal_code"]),
-                     new SqlParameter("?Name", kv["Name"]),
-                     new SqlParameter("?Author", kv["Author"]),
-                     new SqlParameter("?Publisher_name", kv["Publisher_name"]),
-                     new SqlParameter("?Publisher_id", kv["Publisher_id"]),
-                     new SqlParameter("?Publish_date", kv["Publish_date"]),
-                     new SqlParameter("?Price", kv["Price"]),
-                     new SqlParameter("?Language", kv["Language"]),
-                     new SqlParameter("?Status", kv["Status"]),
-                     new SqlParameter("?Location_id", kv["Location_id"]),
-                     new SqlParameter("?is_deleted", kv["is_deleted"]),
-
+                     new MySqlParameter("?ISBN", kv["ISBN"]),
+                     new MySqlParameter("?signal_code", kv["signal_code"]),
+                     new MySqlParameter("?name", kv["name"]),
+                     new MySqlParameter("?author", kv["author"]),
+                     new MySqlParameter("?publisher_name", kv["publisher_name"]),
+                     new MySqlParameter("?publisher_id", kv["publisher_id"]),
+                     new MySqlParameter("?publish_date", kv["publish_date"]),
+                     new MySqlParameter("?price", kv["price"]),
+                     new MySqlParameter("?language",kv["language"]),
+                     new MySqlParameter("?status", kv["status"]),
+                     new MySqlParameter("?location_id",kv["location_id"]),
+                     new MySqlParameter("?is_deleted", "0")
             };
 
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(connectString))
                 {
-                    string sql = "insert book( ISBN, signal_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, location_id, is_deleted) values(?ISBN, ?signal_code, ?name, ?author, ?publisher_name, ?publisher_id, ?publish_date, ?price, ?language, ?status, ?location_id, ?is_deleted)";
+                    string sql = "insert into book(ISBN, signal_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, location_id, is_deleted) values(?ISBN,?signal_code,?name,?author,?publisher_name,?publisher_id,?publish_date,?price,?language,?status,?location_id,?is_deleted)";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddRange(paras);
+                    conn.Open();
                     cmd.ExecuteNonQuery();
                     return true;
                 }
@@ -95,5 +97,7 @@ namespace LIBRARY.DAL
             }
             return false;
         }
+
+
     }
 }

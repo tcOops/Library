@@ -13,7 +13,7 @@ namespace LIBRARY.Models
             set;
         }
 
-        public DateTime Action_date
+        public string Action_date
         {
             get;
             set;

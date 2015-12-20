@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using LIBRARY.BLL;
+using LIBRARY.Models;
 
 namespace LIBRARY.UI
 {
@@ -13,5 +15,14 @@ namespace LIBRARY.UI
         {
 
         }
+
+        public reader getReaderInfo(string student_card_number)
+        {
+            reader reader;
+            AdminBLL adminBLL = new AdminBLL();
+            reader = adminBLL.getReaderInfo(student_card_number);
+            return reader;
+        }
+
     }
 }

@@ -19,7 +19,7 @@ namespace LIBRARY.Models
             set;
         }
 
-        public DateTime Action_date
+        public string Action_date
         {
             get;
             set;
@@ -31,7 +31,7 @@ namespace LIBRARY.Models
             set;
         }
 
-        public DateTime Generate_date
+        public string Generate_date
         {
             get;
             set;

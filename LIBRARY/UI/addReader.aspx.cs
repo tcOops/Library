@@ -14,6 +14,27 @@ namespace LIBRARY.UI
         {
             if (!IsPostBack)
             {
+                if (Request.Files.Count >= 1)
+                {
+                    HttpPostedFile postedFile = Request.Files[0];
+                    string fileName, fileExtension;
+                    fileName = System.IO.Path.GetFileName(postedFile.FileName); //文件名称
+                    if (fileName != "")
+                    {
+                        fileExtension = System.IO.Path.GetExtension(fileName); //上传文件的扩展名
+                        string new_filename = Request.Form["student_code"] + fileExtension; //给文件重新命名
+                        //postedFile.FileName： 客户端文件地址
+                        //postedFile.ContentType.ToString()： 上传的文件类型
+                        string str = Server.MapPath("\\Avatar\\") + new_filename;                                                                              //保存文件到文件夹，地址是当前页面的同一级目录下的files文件夹中
+                        postedFile.SaveAs(str);
+                        Response.Write("success");
+                    }
+                    else
+                    {
+                        Response.Write("false");
+                    }
+                }
+
                 string readerName = Request.Form["reader_name"];
                 string password = Request.Form["password"];
                 string sex = Request.Form["sex"];

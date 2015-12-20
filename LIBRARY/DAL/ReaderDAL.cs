@@ -52,6 +52,40 @@ namespace LIBRARY.DAL
             return readerList;
         }
 
+        public reader getReaderInfo(string student_card_number)
+        {
+            //string connectString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["mysqlConnectString"].ToString();
+            MySqlConnection conn = new MySqlConnection(connectString);
+            string sql = "SELECT name,sex,class_id,student_code,student_card_number,role_id,reader_status,generate_date from reader where student_card_number=" + student_card_number;
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader dr;
+            reader reader = new reader();
+            try
+            {
+                conn.Open();
+                dr = cmd.ExecuteReader();
+                dr.Read();
+                reader.Name = Convert.ToString(dr["name"]);
+                reader.Sex = Convert.ToString(dr["sex"]);
+                reader.Class_id = Convert.ToInt32(dr["class_id"]);
+                reader.Student_code = Convert.ToString(dr["student_code"]);
+                reader.Student_card_number = Convert.ToString(dr["student_card_number"]);
+                reader.Role_id = Convert.ToInt32(dr["role_id"]);
+                reader.Reader_status = Convert.ToString(dr["reader_status"]);
+                reader.Generate_date = Convert.ToDateTime(dr["generate_date"]);
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("finally!");
+            }
+            return reader;
+        }
+
         public bool addReader(Dictionary<string, string> kv)
         {
             MySqlParameter[] paras = 
