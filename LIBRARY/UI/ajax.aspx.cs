@@ -20,7 +20,8 @@ namespace LIBRARY.UI
                  {
                      case "getDemoInfo":
                     {
-                        returnResult = getRealTimeMsg();
+                            //returnResult = getRealTimeMsg();
+                            returnResult = RealTimeMsg();
                     } break;
                      default:
                     {

@@ -67,6 +67,7 @@
     <Content Include="UI\addReader.aspx" />
     <Content Include="UI\ajax.aspx" />
     <Content Include="UI\bookList.aspx" />
+    <Content Include="UI\circulationList.aspx" />
     <Content Include="UI\demo.aspx" />
     <Content Include="UI\home.aspx" />
     <Content Include="UI\login.aspx" />
@@ -120,6 +121,13 @@
     </Compile>
     <Compile Include="UI\bookList.aspx.designer.cs">
       <DependentUpon>bookList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\circulationList.aspx.cs">
+      <DependentUpon>circulationList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\circulationList.aspx.designer.cs">
+      <DependentUpon>circulationList.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\demo.aspx.cs">
       <DependentUpon>demo.aspx</DependentUpon>

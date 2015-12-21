@@ -22,6 +22,8 @@ namespace LIBRARY.DAL
             {
                 conn.Open();
                 dr = cmd.ExecuteReader();
+                string idList = "(";
+                bool flag = false;
                 while (dr.Read())
                 {
                     RFIDRecord RFIDRecord = new RFIDRecord();
@@ -29,12 +31,20 @@ namespace LIBRARY.DAL
                     RFIDRecord.Action_date = Convert.ToString(dr["action_date"]);
                     RFIDRecord.Ip = Convert.ToString(dr["ip"]);
                     RFIDRecord.Id = Convert.ToInt32(dr["id"]);
-                    sql = "update rfidrecord set is_demo = 1 where id = " + Convert.ToString(RFIDRecord.Id);
-                    cmd = new MySqlCommand(sql, conn);
-                    cmd.ExecuteNonQuery();
-                    RFIDRecordList.Add(RFIDRecord);
+                    if (flag)
+                    {
+                        idList += ",";
+                    }
+                    flag = true;
+                    idList += Convert.ToString(RFIDRecord.Id);
+                    //sql = "update rfidrecord set is_demo = 1 where id = " + Convert.ToString(RFIDRecord.Id);
+                    //cmd = new MySqlCommand(sql, conn);
+                    //cmd.ExecuteNonQuery();
+                    RFIDRecordList.Add(RFIDRecord);             
                 }
+                idList += ")";
                 conn.Close();
+                updateDemoRFIDStatus(idList);
             }
             catch (Exception ex)
             {
@@ -45,6 +55,31 @@ namespace LIBRARY.DAL
                 Console.WriteLine("finally!");
             }
             return RFIDRecordList;
+        }
+
+        public bool updateDemoRFIDStatus(string RFIDIdList)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectString))
+                {
+                    string sql = "update rfidrecord set is_demo = 1 where id in " + Convert.ToString(RFIDIdList);
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("finally!");
+            }
+            return false;
         }
     }
 }

@@ -23,3 +23,9 @@ C:\Users\Administrator\Desktop\library - 副本\LIBRARY\bin\LIBRARY.pdb
 C:\Users\Administrator\Desktop\library - 副本\LIBRARY\obj\Debug\LIBRARY.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\library - 副本\LIBRARY\obj\Debug\LIBRARY.dll
 C:\Users\Administrator\Desktop\library - 副本\LIBRARY\obj\Debug\LIBRARY.pdb
+C:\Users\Administrator\Desktop\demo\LIBRARY\bin\LIBRARY.dll.config
+C:\Users\Administrator\Desktop\demo\LIBRARY\bin\LIBRARY.dll
+C:\Users\Administrator\Desktop\demo\LIBRARY\bin\LIBRARY.pdb
+C:\Users\Administrator\Desktop\demo\LIBRARY\obj\Debug\LIBRARY.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\demo\LIBRARY\obj\Debug\LIBRARY.dll
+C:\Users\Administrator\Desktop\demo\LIBRARY\obj\Debug\LIBRARY.pdb

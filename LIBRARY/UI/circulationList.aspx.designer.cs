@@ -10,6 +10,6 @@
 namespace LIBRARY.UI {
     
     
-    public partial class bookList {
+    public partial class circulationList {
     }
 }

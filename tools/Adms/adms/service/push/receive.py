@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Administrator'
 
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 import tornado.web
 from adms.device.push.device import ALL_PUSH_DEVICE
 from adms.comm.push.protocol.protocol import ResponseCode, QueryCode
@@ -63,7 +67,13 @@ class pushDB(object):
             bookCodeRes, actionDateRes = '-1', ''
             for each in data:
                 bookCode, actionDate = each[0], each[1]
-                if bookCode == bookCodeRes and actionDate == actionDateRes:
+                t1 = time.mktime(time.strptime(actionDate,'%Y-%m-%d %H:%M:%S'))
+                if not actionDateRes: t2 = t1 + 3
+                else: t2 = time.mktime(time.strptime(actionDateRes,'%Y-%m-%d %H:%M:%S'))
+                print 'sssssssssbbbbbbb'
+                print t1, t2
+                diff = t2 - t1 if t1 < t2 else t1 - t2
+                if bookCode == bookCodeRes and diff <= 1:
                     pass
                 else:
                     if bookCode not in statical:
@@ -72,18 +82,25 @@ class pushDB(object):
                         statical[bookCode] += 1
                     bookCodeRes, actionDateRes = bookCode, actionDate
 
+            sql0 = "select name from reader where student_card_number = '{0}'".format(readerCode)
+            self.cursor.execute(sql0)
+            data = self.cursor.fetchone()
+            readerName = data[0]
+
             for key in statical:
-                sql1 = "select status from book where signal_code = '{0}'".format(key)
+                sql1 = "select status, name from book where signal_code = '{0}'".format(key)
                 self.cursor.execute(sql1)
                 data = self.cursor.fetchone()
 
                 originalSta = 0
-                if data[0] == 'out': #book in door
+                if data:
+                    bookName = data[1]
+                if data and data[0] == 'out': #book in door
                     originalSta = 1
 
                 if originalSta and statical[key] & 1:#signal_code == reader_id
-                    sql2 = """insert into circulation(book_id, signal_code, action_time, action_type, is_deleted)
-                     values('{0}', '{1}', '{2}', '{3}', '{4}')""".format(key, readerCode, actionDate, '还书', 0)
+                    sql2 = """insert into circulation(book_id, signal_code, action_time, action_type, is_deleted, reader_name, book_name)
+                     values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')""".format(key, readerCode, actionDate, '还书', 0, readerName, bookName)
                     print 'aaaaaa2222',sql2
                     self.cursor.execute(sql2)
                     self.db.commit()
@@ -93,8 +110,8 @@ class pushDB(object):
                     self.db.commit()
 
                 if (originalSta == 0) and statical[key] & 1:#signal_code == reader_id
-                    sql2 = """insert into circulation(book_id, signal_code, action_time, action_type, is_deleted)
-                     values('{0}', '{1}', '{2}', '{3}', '{4}')""".format(key, readerCode, actionDate, '借书', 0)
+                    sql2 = """insert into circulation(book_id, signal_code, action_time, action_type, is_deleted,  reader_name, book_name)
+                     values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')""".format(key, readerCode, actionDate, '借书', 0, readerName, bookName)
                     print 'aaaaaa4444',sql2
                     self.cursor.execute(sql2)
                     self.db.commit()
@@ -165,7 +182,7 @@ class ReceiveData(tornado.web.RequestHandler):
         if int(signalCode) != 0:
             pushDb = pushDB()
             sql = '''insert into doorrecord(action, action_date, signal_code,
-             door_ip, generate_date, is_deleted) values('{0}', '{1}', '{2}', '{3}', '{4}', {5})'''.format('open', actionTime, signalCode, ip, now, 0)
+             door_ip, generate_date, is_deleted, is_demo) values('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6})'''.format('open', actionTime, signalCode, ip, now, 0, 0)
             print sql
             pushDb.pushDoorInfo(sql)
         return ResponseCode.SUCCESS
@@ -197,7 +214,7 @@ class ReceiveData(tornado.web.RequestHandler):
                 if diff > 8 or diff < 3: # not the delay time, but the action for closing
                     now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
                     sql = '''insert into doorrecord(action, action_date, signal_code,
-             door_ip, generate_date, is_deleted) values('{0}', '{1}', '{2}', '{3}', '{4}', {5})'''.format('close', nowTime, signalCode, ip, now, 0)
+             door_ip, generate_date, is_deleted, is_demo) values('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6})'''.format('close', nowTime, signalCode, ip, now, 0, 0)
                     pushDb.pushDoorInfo(sql)
                     pushDb.handle(ip, systemNowTime, now, signalCode, now)
         return ResponseCode.SUCCESS

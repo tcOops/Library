@@ -21,6 +21,8 @@ class Server(HD):
         print "waiting for connection"
         dataSplit = ''
         cnt = 1
+
+        bookSignalCode, opTime = '', -1
         while True:
             data = self.request.recv(1024)
             if not data:
@@ -45,10 +47,18 @@ class Server(HD):
                     ip_port, signal_code = each.split(',')
                     ip = ipList[ip_port]
                     now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
-                    sql = "insert into rfidrecord(action_date, signal_code, ip, is_deleted) values('{0}', '{1}', '{2}', {3})".format(now, signal_code, ip, '0')
-                    pushDb.push(sql)
-                dataSplit = ''
+                    sql = "insert into rfidrecord(action_date, signal_code, ip, is_deleted, is_demo) values('{0}', '{1}', '{2}', {3}, {4})".format(now, signal_code, ip, 0, 0)
 
+                    diff, nt = 10, time.time()
+                    if opTime != -1:
+                        diff = nt - opTime if opTime < nt else opTime - nt
+                    if bookSignalCode == signal_code and diff <= 2.0:
+                        pass
+                    else: pushDb.push(sql)
+
+                    opTime, bookSignalCode = nt, signal_code
+
+                dataSplit = ''
         pushDb.db.close()
 
 class pushDB:

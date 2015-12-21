@@ -56,6 +56,34 @@ namespace LIBRARY.DAL
             return bookList;
         }
 
+        public string getbookNameBySC(string signal_code)
+        {
+            //string connectString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["mysqlConnectString"].ToString();
+            MySqlConnection conn = new MySqlConnection(connectString);
+            string sql = "select name from book where signal_code = \"" + signal_code + "\"";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader dr;
+            string bookName = "";
+            try
+            {
+                conn.Open();
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    bookName = Convert.ToString(dr[0]);
+                }
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("finally!");
+            }
+            return bookName;
+        }
 
         public bool addBook(Dictionary<string, string> kv)
         {

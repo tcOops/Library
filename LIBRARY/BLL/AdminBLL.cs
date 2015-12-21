@@ -62,46 +62,63 @@ namespace LIBRARY.BLL
         }
 
 
-         public string getDemoRTInfo()
-         {
-             DoorDAL doorDAL = new DoorDAL();
-             List<doorRecord> doorRecordList = doorDAL.getDemoDoorInfo();
-             RfidDAL rfidDAL = new RfidDAL();
-             List<RFIDRecord> RFIDRecordList = rfidDAL.getDemoRFIDInfo();
-             string demoInfoInJson = "[";
-             bool flag = true;
+        public string getDemoRTInfo()
+        {
+            DoorDAL doorDAL = new DoorDAL();
+            List<doorRecord> doorRecordList = doorDAL.getDemoDoorInfo();
+            RfidDAL rfidDAL = new RfidDAL();
+            List<RFIDRecord> RFIDRecordList = rfidDAL.getDemoRFIDInfo();
 
-             //Door_RT_info
-             foreach (doorRecord doorRecord in doorRecordList)
-             {
-                 if (!flag)
-                 {
-                     demoInfoInJson += ",";
-                 }
-                 string each = "{\"action\":" + doorRecord.Action + ",";
-                 each += "{\"generate_date\":" + doorRecord.Generate_date + ",";
-                 each += "{\"door_ip\":" + doorRecord.Door_ip + "}";
-                 demoInfoInJson += each;
-                 flag = false;
-             }
+            bookDAL bookDAL = new bookDAL();
+            ReaderDAL readerDAL = new ReaderDAL();
+            string demoInfoInJson = "[";
+            bool flag = true;
+
+            //Door_RT_info
+            foreach (doorRecord doorRecord in doorRecordList)
+            {
+                if (!flag)
+                {
+                    demoInfoInJson += ",";
+                }
+
+                string readerName = readerDAL.getReaderNameBySC(doorRecord.Signal_code);
+                string each = "{\"action\":\"" + doorRecord.Action + "\",";
+                each += "\"reader_name\":\"" + readerName + "\",";
+                each += "\"generate_date\":\"" + doorRecord.Generate_date + "\",";
+                each += "\"door_ip\":\"" + doorRecord.Door_ip + "\"}";
+                demoInfoInJson += each;
+                flag = false;
+            }
 
 
-             //RFID_RT_info
-             foreach (RFIDRecord RFIDRecord in RFIDRecordList)
-             {
-                 if (!flag)
-                 {
-                     demoInfoInJson += ",";
-                 }
-                 string each = "{\"signal_code\":" + RFIDRecord.Signal_code + ",";
-                 each += "{\"action_date\":" + RFIDRecord.Action_date + ",";
-                 each += "{\"ip\":" + RFIDRecord.Ip + "}";
-                 demoInfoInJson += each;
-                 flag = false;
-             }
+            //RFID_RT_info
+            foreach (RFIDRecord RFIDRecord in RFIDRecordList)
+            {
+                if (!flag)
+                {
+                    demoInfoInJson += ",";
+                }
+                string bookName = bookDAL.getbookNameBySC(RFIDRecord.Signal_code);
+                string each = "{\"signal_code\":\"" + RFIDRecord.Signal_code + "\",";
+                each += "\"book_name\":\"" + bookName + "\",";
+                each += "\"action_date\":\"" + RFIDRecord.Action_date + "\",";
+                each += "\"ip\":\"" + RFIDRecord.Ip + "\"}";
+                demoInfoInJson += each;
+                flag = false;
+            }
 
-             demoInfoInJson += "]";
-             return demoInfoInJson;
-         }
+            demoInfoInJson += "]";
+            return demoInfoInJson;
+        }
+
+
+        public List<circulation> getCirculations()
+        {
+            circulationDAL circulationDAL = new circulationDAL();
+            List<circulation> circulationList;
+            circulationList = circulationDAL.getCirculationList();
+            return circulationList;
+        }
     }
 }

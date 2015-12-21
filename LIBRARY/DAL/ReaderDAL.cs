@@ -52,6 +52,40 @@ namespace LIBRARY.DAL
             return readerList;
         }
 
+        /// <summary>
+        /// Chose the readerInfo by Signal_code
+        /// </summary>
+        /// <returns></returns>
+        public string getReaderNameBySC(string signal_code)
+        {
+            //string connectString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["mysqlConnectString"].ToString();
+            MySqlConnection conn = new MySqlConnection(connectString);
+            string sql = "select name from reader where student_card_number = \"" + signal_code + "\"";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader dr;
+            string readerName = "";
+            try
+            {
+                conn.Open();
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    readerName = Convert.ToString(dr[0]);
+                }
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("finally!");
+            }
+            return readerName;
+        }
+
+
         public reader getReaderInfo(string student_card_number)
         {
             //string connectString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["mysqlConnectString"].ToString();

@@ -42,5 +42,11 @@ namespace LIBRARY.Models
             get;
             set;
         }
+
+        public string Signal_code
+        {
+            get;
+            set;
+        }
     }
 }

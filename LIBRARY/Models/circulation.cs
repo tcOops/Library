@@ -13,25 +13,32 @@ namespace LIBRARY.Models
             set;
         }
 
-        public int Reader_id
+        public string Reader_name //
         {
             get;
             set;
         }
 
-        public int Book_id
+        public string Book_id //书的卡号
         {
             get;
             set;
         }
 
-        public string Signal_code
+        public string Signal_code //读者卡号
         {
             get;
             set;
         }
 
-        public DateTime Action_time
+
+        public string Book_name
+        {
+            get;
+            set;
+        }
+
+        public string Action_time
         {
             get;
             set;
