@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="location.aspx.cs" Inherits="LIBRARY.UI.location" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="addClass.aspx.cs" Inherits="LIBRARY.UI.addClass" %>
 
 <!DOCTYPE html>
 

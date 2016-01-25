@@ -10,11 +10,14 @@
     <link href="/static/css/bootstrap.css" media="all" rel="stylesheet"/>
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
 </head>
 
 <body>
     <%
         List<LIBRARY.Models.reader> readerList = getReaderList();
+        int size = readerList.Count();
+        int cnt = 0;
     %>
             
 <div class="" style="margin:30px 20px 20px 25px">
@@ -27,45 +30,41 @@
 					<div class="sidebar-tab-active"><a href="readerList.aspx">读者管理</a></div>
 					<div class="sidebar-tab"><a href="bookList.aspx">图书管理</a></div>
                     <div class="sidebar-tab"><a href="circulationList.aspx">流通信息管理</a></div>
+                    <div class="sidebar-tab"><a href="locationList.aspx">馆藏地管理</a></div> 
+                    <div class="sidebar-tab"><a href="classList.aspx">班级管理</a></div>
+                    <div class="sidebar-tab"><a href="gradeList.aspx">年级管理</a></div>      
                     <div class="sidebar-tab"><a href="demo.aspx">演示功能</a></div>
 		</div>
 		<div class="col-md-10 column">
-		    <h3>读者列表（）</h3>
-			<div style="margin:15px 0 10px 5px">
-				<button class="btn btn-sm" onclick="choseAll()">
-				      全选
-				</button>
-				&nbsp;&nbsp;
-				<button class="btn btn-sm" onclick="choseReverse()">
-				      反选
-				</button>
-			</div>
-
-
+		    <h3>读者列表(<%=size %>)</h3>
+		
 			<table style="border-width:0px;border-collapse:collapse;width:100%">
 				<tr style="background-color:#E0E0E0;height:40px;border-width:0px">
-					<td style="width:8%;border-width:0px;font-weight:bold;text-align:center">选中</td>
 					<td style="width:8%;border-width:0px;font-weight:bold;text-align:center">标号</td>
-					<td style="width:14%; border-width:0px;font-weight:bold;text-align:center">姓名</td>
-					<td style="width:15%; border-width:0px;font-weight:bold;text-align:center"> 班级 </td>
-					<td style="width:25%; border-width:0px;font-weight:bold;text-align:center"> 身份证件卡号</td>
-					<td style="width:10%; border-width:0px;font-weight:bold;text-align:center">读者身份</td>
-					<td style="width:12%;border-width:0px;font-weight:bold;text-align:center">读者状态</td>
-					<td style="width:8%;border-width:0px;font-weight:bold;text-align:center">操作</td>
+					<td style="width:15%; border-width:0px;font-weight:bold;text-align:center">姓名</td>
+					<td style="width:16%; border-width:0px;font-weight:bold;text-align:center"> 班级 </td>
+					<td style="width:27%; border-width:0px;font-weight:bold;text-align:center"> 身份证件卡号</td>
+					<td style="width:12%; border-width:0px;font-weight:bold;text-align:center">读者身份</td>
+					<td style="width:13%;border-width:0px;font-weight:bold;text-align:center">读者状态</td>
+					<td style="width:9%;border-width:0px;font-weight:bold;text-align:center">操作</td>
 				</tr>
 			</table>
 
             <% foreach (var reader in readerList){ %>
-			    <table id = "dnsContent" style="border-width:0px;border-collapse:collapse;width:100%;table-layout:fixed;word-wrap:break-word;word-break:break-all;">
-				<tr class="{% cycle row1,row2 %}" style="">
-				    <td style="width:8%;border-width:0px;font-weight:bold;text-align:center"><input type='checkbox' value="<%=reader.Id%>" class="selectNode"/></td>
+			    <% cnt = cnt + 1; %>
+			    <table id = "locationContent" style="border-width:0px;border-collapse:collapse;width:100%;table-layout:fixed;word-wrap:break-word;word-break:break-all;">
+				<% if (cnt % 2 == 1)
+                    {%><tr class="row1" style=""> <%} %>
+                <% if (cnt % 2 == 0)
+                    {%><tr class="row2" style=""> <%} %>
+				   <!-- <td style="width:8%;border-width:0px;font-weight:bold;text-align:center"><input type='checkbox' value="<%=reader.Id%>" class="selectNode"/></td>-->
 				    <td style="width:8%;border-width:0px;text-align:center"><%=reader.Id%></td>
-				    <td style="width:14%;border-width:0px;text-align:center;border-width:0px;text-align:center;border-width:0px;text-align:center"><%=reader.Name%></td>
-				    <td style="width:15%;border-width:0px;text-align:center;border-width:0px;text-align:center"><%=reader.Class_id%></td>
-				    <td style="width:25%;border-width:0px;text-align:center"><%=reader.Student_card_number%></td>
-				    <td style="width:10%;border-width:0px;text-align:center"><%=reader.Role_id%></td>
-				    <td style="width:12%;border-width:0px;text-align:center"><%=reader.Reader_status%></td>
-                    <td style="width:8%;border-width:0px;font-weight:bold;text-align:center">
+				    <td style="width:15%;border-width:0px;text-align:center;border-width:0px;text-align:center;border-width:0px;text-align:center"><%=reader.Name%></td>
+				    <td style="width:16%;border-width:0px;text-align:center;border-width:0px;text-align:center"><%=reader.Class_id%></td>
+				    <td style="width:27%;border-width:0px;text-align:center"><%=reader.Student_card_number%></td>
+				    <td style="width:12%;border-width:0px;text-align:center"><%=reader.Role_id%></td>
+				    <td style="width:13%;border-width:0px;text-align:center"><%=reader.Reader_status%></td>
+                    <td style="width:9%;border-width:0px;font-weight:bold;text-align:center">
 				        <form action="readerList.aspx" method='post'>
 					        <input style="display:none;" id="nodeIdRes" name="nodeIdRes" value="<%=reader.Id%>" />
 					        <input type='submit' value="删除" class="selectNode"/>

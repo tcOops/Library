@@ -120,5 +120,50 @@ namespace LIBRARY.BLL
             circulationList = circulationDAL.getCirculationList();
             return circulationList;
         }
+
+
+        public List<Class> getClasses()
+        {
+            ClassDAL ClassDAL = new ClassDAL();
+            List<Class> ClassList;
+            ClassList = ClassDAL.getClassList();
+            return ClassList;
+        }
+
+        public bool addClass(Dictionary<string, string> kv)
+        {
+            ClassDAL ClassDAL = new ClassDAL();
+            return ClassDAL.addClass(kv);
+        }
+
+        public List<grade> getGrades()
+        {
+            GradeDAL GradeDAL = new GradeDAL();
+            List<grade> gradeList;
+            gradeList = GradeDAL.getGradeList();
+            return gradeList;
+        }
+
+        public bool addGrade(Dictionary<string, string> kv)
+        {
+            GradeDAL GradeDAL = new GradeDAL();
+            return GradeDAL.addGrade(kv);
+        }
+
+
+        public List<bookstoreLocation> getLocation()
+        {
+            LocationDAL locationDAL = new LocationDAL();
+            List<bookstoreLocation> locationList = new List<bookstoreLocation>();
+            locationList = locationDAL.getLocation();
+            return locationList;
+        }
+
+
+        public bool addLocation(Dictionary<string, string> kv)
+        {
+            LocationDAL locationDAL = new LocationDAL();
+            return locationDAL.addLocation(kv);
+        }
     }
 }

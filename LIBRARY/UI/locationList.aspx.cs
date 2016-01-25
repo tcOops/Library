@@ -7,9 +7,10 @@ using System.Web.UI.WebControls;
 using LIBRARY.BLL;
 using LIBRARY.Models;
 
+
 namespace LIBRARY.UI
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class locationList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,13 +20,6 @@ namespace LIBRARY.UI
             }
         }
 
-        public List<reader> getReaderList()
-        {
-            List<reader> readerList;
-            AdminBLL adminBLL = new AdminBLL();
-            readerList = adminBLL.getReaders();
-            return readerList;
-        }
 
         public List<bookstoreLocation> getLocationList()
         {

@@ -11,7 +11,7 @@ namespace LIBRARY.UI
 {
 
 
-    public partial class location
+    public partial class addGrade
     {
 
         /// <summary>

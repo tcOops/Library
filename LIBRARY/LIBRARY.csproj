@@ -61,15 +61,60 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="static\css\admin.css" />
+    <Content Include="static\css\base.css" />
+    <Content Include="static\css\bootstrap.css" />
+    <Content Include="static\css\bootstrap.min.css" />
+    <Content Include="static\css\dashboard.css" />
+    <Content Include="static\css\indroid.css" />
+    <Content Include="static\css\main.css" />
+    <Content Include="static\css\ori.css" />
+    <Content Include="static\css\style.css" />
+    <Content Include="static\css\styles.css" />
+    <Content Include="static\img\10.jpg" />
+    <Content Include="static\img\a.png" />
+    <Content Include="static\img\b.png" />
+    <Content Include="static\img\circulation.ico" />
+    <Content Include="static\img\cube.jpg" />
+    <Content Include="static\img\demo.ico" />
+    <Content Include="static\img\figure.jpg" />
+    <Content Include="static\img\footerbg.png" />
+    <Content Include="static\img\headerbg.png" />
+    <Content Include="static\img\headernav-active.png" />
+    <Content Include="static\img\headernav.png" />
+    <Content Include="static\img\headertrans.png" />
+    <Content Include="static\img\LibraryLogo.png" />
+    <Content Include="static\img\logo.png" />
+    <Content Include="static\img\reader.ico" />
+    <Content Include="static\img\search.png" />
+    <Content Include="static\img\sidebarbg.png" />
+    <Content Include="static\img\sidebarbg2.png" />
+    <Content Include="static\img\sidebar_tab.png" />
+    <Content Include="static\img\sort-dn.png" />
+    <Content Include="static\img\sort-up.png" />
+    <Content Include="static\js\bootstrap.min.js" />
+    <Content Include="static\js\date.js" />
     <Content Include="static\js\demo.js" />
+    <Content Include="static\js\highcharts.js" />
+    <Content Include="static\js\index.js" />
+    <Content Include="static\js\jquery-1.11.3.min.js" />
+    <Content Include="static\js\jquery.1.7.min.js" />
     <Content Include="static\js\jQuery.js" />
+    <Content Include="static\js\jquery.min.js" />
+    <Content Include="static\js\order.js" />
     <Content Include="UI\addBook.aspx" />
+    <Content Include="UI\addClass.aspx" />
+    <Content Include="UI\addGrade.aspx" />
+    <Content Include="UI\addLocation.aspx" />
     <Content Include="UI\addReader.aspx" />
     <Content Include="UI\ajax.aspx" />
     <Content Include="UI\bookList.aspx" />
     <Content Include="UI\circulationList.aspx" />
+    <Content Include="UI\classList.aspx" />
     <Content Include="UI\demo.aspx" />
+    <Content Include="UI\gradeList.aspx" />
     <Content Include="UI\home.aspx" />
+    <Content Include="UI\locationList.aspx" />
     <Content Include="UI\login.aspx" />
     <Content Include="UI\readerList.aspx" />
     <Content Include="Web.config" />
@@ -79,7 +124,10 @@
     <Compile Include="DAL\AdminDAL.cs" />
     <Compile Include="DAL\bookDAL.cs" />
     <Compile Include="DAL\CirculationDAL.cs" />
+    <Compile Include="DAL\ClassDAL.cs" />
     <Compile Include="DAL\DoorDAL.cs" />
+    <Compile Include="DAL\GradeDAL.cs" />
+    <Compile Include="DAL\LocationDAL.cs" />
     <Compile Include="DAL\ReaderDAL.cs" />
     <Compile Include="DAL\RfidDAL.cs" />
     <Compile Include="Models\admin.cs" />
@@ -100,6 +148,27 @@
     </Compile>
     <Compile Include="UI\addBook.aspx.designer.cs">
       <DependentUpon>addBook.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\addClass.aspx.cs">
+      <DependentUpon>addClass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\addClass.aspx.designer.cs">
+      <DependentUpon>addClass.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\addGrade.aspx.cs">
+      <DependentUpon>addGrade.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\addGrade.aspx.designer.cs">
+      <DependentUpon>addGrade.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\addLocation.aspx.cs">
+      <DependentUpon>addLocation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\addLocation.aspx.designer.cs">
+      <DependentUpon>addLocation.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\addReader.aspx.cs">
       <DependentUpon>addReader.aspx</DependentUpon>
@@ -129,6 +198,13 @@
     <Compile Include="UI\circulationList.aspx.designer.cs">
       <DependentUpon>circulationList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UI\classList.aspx.cs">
+      <DependentUpon>classList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\classList.aspx.designer.cs">
+      <DependentUpon>classList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI\demo.aspx.cs">
       <DependentUpon>demo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -136,12 +212,26 @@
     <Compile Include="UI\demo.aspx.designer.cs">
       <DependentUpon>demo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UI\gradeList.aspx.cs">
+      <DependentUpon>gradeList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\gradeList.aspx.designer.cs">
+      <DependentUpon>gradeList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI\home.aspx.cs">
       <DependentUpon>home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UI\home.aspx.designer.cs">
       <DependentUpon>home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\locationList.aspx.cs">
+      <DependentUpon>locationList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\locationList.aspx.designer.cs">
+      <DependentUpon>locationList.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
@@ -166,10 +256,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="static\css\" />
-    <Folder Include="static\img\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

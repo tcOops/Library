@@ -9,11 +9,14 @@
     <script src="/static/js/jquery-1.11.3.min.js"></script>
     <link href="/static/css/bootstrap.css" media="all" rel="stylesheet"/>
 	<script src="/static/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
 	<script src="/static/js/index.js"></script>
 </head>
 <body>
     <%
         List<LIBRARY.Models.book> bookList = getBookList();
+        int size = bookList.Count();
+        int cnt = 0;
     %>
             
     <div class="" style="margin:30px 20px 20px 25px">
@@ -22,57 +25,52 @@
 	    </div>
 	    <div class="row clearfix" style="margin:20px 0 20px 0px">
 		    <div class="col-md-2 column" style="background:rgba(198, 190, 204, 1)">
-					    <div class="sidebar-tab-active"><a href="readerList.aspx">读者管理</a></div>
-					    <div class="sidebar-tab"><a href="bookList.aspx">图书管理</a></div>
+					    <div class="sidebar-tab"><a href="readerList.aspx">读者管理</a></div>
+					    <div class="sidebar-tab-active"><a href="bookList.aspx">图书管理</a></div>
                         <div class="sidebar-tab"><a href="circulationList.aspx">流通信息管理</a></div>
+                        <div class="sidebar-tab"><a href="locationList.aspx">馆藏地管理</a></div>
+                        <div class="sidebar-tab"><a href="classList.aspx">班级管理</a></div>
+                        <div class="sidebar-tab"><a href="gradeList.aspx">年级管理</a></div>
                         <div class="sidebar-tab"><a href="demo.aspx">演示功能</a></div>
 		    </div>
 		    <div class="col-md-10 column">
-		    <h3>图书列表</h3>
-			    <div style="margin:15px 0 10px 5px">
-				    <button class="btn btn-sm" onclick="choseAll()">
-				          全选
-				    </button>
-				    &nbsp;&nbsp;
-				    <button class="btn btn-sm" onclick="choseReverse()">
-				          反选
-				    </button>
-			    </div>
+		    <h3>图书列表(<%=size%>)</h3>
 
-
-			    <table style="border-width:0px;border-collapse:collapse;width:100%">
-				    <tr style="background-color:#E0E0E0;border-width:0px">
-					    <td style="width:3%;border-width:0px;font-weight:bold;text-align:center">选中</td>
-					    <td style="width:6%;border-width:0px;font-weight:bold;text-align:center">标号</td>
-					    <td style="width:16%; border-width:0px;font-weight:bold;text-align:center"> 标识码 </td>
-					    <td style="width:26%; border-width:0px;font-weight:bold;text-align:center"> 书名</td>
-					    <td style="width:6%; border-width:0px;font-weight:bold;text-align:center">作者</td>
-                        <td style="width:6%;border-width:0px;font-weight:bold;text-align:center">价格</td>
-                        <td style="width:6%;border-width:0px;font-weight:bold;text-align:center">是否借出</td>
-                        <td style="width:6%;border-width:0px;font-weight:bold;text-align:center">操作</td>
+			  <table style="border-width:0px;border-collapse:collapse;width:100%">
+				<tr style="background-color:#E0E0E0;height:40px;border-width:0px">
+					    <td style="width:9%;border-width:0px;font-weight:bold;text-align:center">标号</td>
+					    <td style="width:19%; border-width:0px;font-weight:bold;text-align:center"> 标识码 </td>
+					    <td style="width:29%; border-width:0px;font-weight:bold;text-align:center"> 书名</td>
+					    <td style="width:11%; border-width:0px;font-weight:bold;text-align:center">作者</td>
+                        <td style="width:11%;border-width:0px;font-weight:bold;text-align:center">价格</td>
+                        <td style="width:11%;border-width:0px;font-weight:bold;text-align:center">是否借出</td>
+                        <td style="width:10%;border-width:0px;font-weight:bold;text-align:center">操作</td>
 				    </tr>
+                </table>
 			
 
-                <% foreach (var book in bookList){
-                     if (book.Is_deleted==false) {%>
-                    <tr style="background-color:#E0E0E0;border-width:0px">
-				        <td style="width:3%;border-width:0px;font-weight:bold;text-align:center"><input type='checkbox' value="<%=book.Id%>" class="selectNode"/></td>
-				        <td style="width:6%;border-width:0px;text-align:center"><%=book.Id%></td>
-                        <td style="width:16%;border-width:0px;text-align:center"><%=book.Signal_code%></td>
-                        <td style="width:26%;border-width:0px;text-align:center"><%=book.Name%></td>
-                        <td style="width:6%;border-width:0px;text-align:center"><%=book.Author%></td>
-                        <td style="width:6%;border-width:0px;text-align:center"><%=book.Price%></td>
-                        <td style="width:6%;border-width:0px;text-align:center"><%=book.Status%></td>
+                <% foreach (var book in bookList){%>
+                <% cnt = cnt + 1; %>
+			    <table id = "locationContent" style="border-width:0px;border-collapse:collapse;width:100%;table-layout:fixed;word-wrap:break-word;word-break:break-all;">
+				    <% if (cnt % 2 == 1)
+                        {%><tr class="row1" style=""> <%} %>
+                    <% if (cnt % 2 == 0)
+                        {%><tr class="row2" style=""> <%} %>
+				    <!--  <td style="width:3%;border-width:0px;font-weight:bold;text-align:center"><input type='checkbox' value="<%=book.Id%>" class="selectNode"/></td> -->
+				    <td style="width:9%;border-width:0px;text-align:center"><%=book.Id%></td>
+                    <td style="width:19%;border-width:0px;text-align:center"><%=book.Signal_code%></td>
+                    <td style="width:29%;border-width:0px;text-align:center"><%=book.Name%></td>
+                    <td style="width:11%;border-width:0px;text-align:center"><%=book.Author%></td>
+                    <td style="width:11%;border-width:0px;text-align:center"><%=book.Price%></td>
+                    <td style="width:11%;border-width:0px;text-align:center"><%=book.Status%></td>
                   
-                        <td style="width:6%;border-width:0px;font-weight:bold;text-align:center">
-				            <form action="bookList.aspx" method='post'>
-					            <input style="display:none;" id="nodeIdRes" name="nodeIdRes" value="<%=book.Id%>" />
-					            <input type='submit' value="删除" class="selectNode"/>
-				            </form>
-                        </td>
-                    </tr>
-			
-                <%}} %>
+                    <td style="width:10%;border-width:0px;font-weight:bold;text-align:center">
+				        <form action="bookList.aspx" method='post'>
+					        <input style="display:none;" id="nodeIdRes" name="nodeIdRes" value="<%=book.Id%>" />
+					        <input type='submit' value="删除" class="selectNode"/>
+				        </form>
+                    </td>		
+                <%} %>
                 </table>
 			    <div style="margin:20px 0 0 20px">
 				    <!-- 按钮触发模态框 -->

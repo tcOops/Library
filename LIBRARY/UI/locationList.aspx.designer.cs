@@ -10,6 +10,6 @@
 namespace LIBRARY.UI {
     
     
-    public partial class login {
+    public partial class locationList {
     }
 }

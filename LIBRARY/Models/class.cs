@@ -24,5 +24,12 @@ namespace LIBRARY.Models
             get;
             set;
         }
+
+
+        public string Code_number
+        {
+            get;
+            set;
+        }
     }
 }

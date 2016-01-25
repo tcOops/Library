@@ -23,7 +23,8 @@ create table if not exists bookstoreLocation(
        door_ip varchar(60),
        door_port int(6),
        RFID_ip varchar(60),
-       RFID_port int(6)
+       RFID_port int(6),
+       code varchar(20)
 );
 
 -- drop table circulation;
@@ -41,7 +42,8 @@ create table if not exists circulation(
 create table if not exists class(
         id int(4) not null primary key auto_increment,
         name varchar(150),
-        grade_id int(4)
+        grade_id int(4),
+        code_number varchar(20)
 );
 
 -- drop table doorRecord;
