@@ -15,7 +15,7 @@ namespace LIBRARY.DAL
         {
             //string connectString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["mysqlConnectString"].ToString();
             MySqlConnection conn = new MySqlConnection(connectString);
-            string sql = "SELECT id, ISBN, serial_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, location_id, is_deleted from book";
+            string sql = "SELECT id, ISBN, serial_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, location_id, is_deleted from book where is_deleted = 0 limit 100";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             MySqlDataReader dr;
             List<book> bookList = new List<book>();
