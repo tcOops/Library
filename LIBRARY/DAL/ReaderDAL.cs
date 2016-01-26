@@ -15,7 +15,7 @@ namespace LIBRARY.DAL
         {
             //string connectString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["mysqlConnectString"].ToString();
             MySqlConnection conn = new MySqlConnection(connectString);
-            string sql = "SELECT id, name, sex, class_id, student_code, student_card_number, role_id, reader_status, generate_date from reader where is_deleted = 0";
+            string sql = "SELECT id, name, sex, class_id, student_code, student_card_number, role, reader_status, generate_date from reader where is_deleted = 0";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             MySqlDataReader dr;
             List<reader> readerList = new List<reader>();
@@ -30,10 +30,10 @@ namespace LIBRARY.DAL
                     reader.Id =  Convert.ToInt32(dr["id"]);
                     reader.Name = Convert.ToString(dr["name"]);
                     reader.Sex = Convert.ToString(dr["sex"]);
-                    reader.Class_id = Convert.ToInt32(dr["class_id"]);
+                    reader.Class_id = Convert.ToString(dr["class_id"]);
                     reader.Student_code = Convert.ToString(dr["student_code"]);
                     reader.Student_card_number = Convert.ToString(dr["student_card_number"]);
-                    reader.Role_id = Convert.ToInt32(dr["role_id"]);
+                    reader.Role = Convert.ToString(dr["role"]);
                     reader.Reader_status = Convert.ToString(dr["reader_status"]);
                     reader.Generate_date = Convert.ToDateTime(dr["generate_date"]);
 
@@ -90,7 +90,7 @@ namespace LIBRARY.DAL
         {
             //string connectString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["mysqlConnectString"].ToString();
             MySqlConnection conn = new MySqlConnection(connectString);
-            string sql = "SELECT name,sex,class_id,student_code,student_card_number,role_id,reader_status,generate_date from reader where student_card_number=" + student_card_number;
+            string sql = "SELECT name,sex,class_id,student_code,student_card_number,role,reader_status,generate_date from reader where student_card_number=" + student_card_number;
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             MySqlDataReader dr;
             reader reader = new reader();
@@ -101,10 +101,10 @@ namespace LIBRARY.DAL
                 dr.Read();
                 reader.Name = Convert.ToString(dr["name"]);
                 reader.Sex = Convert.ToString(dr["sex"]);
-                reader.Class_id = Convert.ToInt32(dr["class_id"]);
+                reader.Class_id = Convert.ToString(dr["class_id"]);
                 reader.Student_code = Convert.ToString(dr["student_code"]);
                 reader.Student_card_number = Convert.ToString(dr["student_card_number"]);
-                reader.Role_id = Convert.ToInt32(dr["role_id"]);
+                reader.Role = Convert.ToString(dr["role"]);
                 reader.Reader_status = Convert.ToString(dr["reader_status"]);
                 reader.Generate_date = Convert.ToDateTime(dr["generate_date"]);
                 conn.Close();
@@ -130,7 +130,7 @@ namespace LIBRARY.DAL
                      new MySqlParameter("?classId", kv["classId"]),
                      new MySqlParameter("?studentCode", kv["studentCode"]),
                      new MySqlParameter("?studentCardNumber", kv["studentCardNumber"]),
-                     new MySqlParameter("?roleId", kv["roleId"]),
+                     new MySqlParameter("?role", kv["role"]),
                      new MySqlParameter("?readerStatus", "使用中"),
                      new MySqlParameter("?generateDate", Convert.ToString(DateTime.Now)),
                      new MySqlParameter("?isDeleted", "0")
@@ -140,7 +140,7 @@ namespace LIBRARY.DAL
             {
                 using (MySqlConnection conn = new MySqlConnection(connectString))
                 {
-                    string sql = "insert into reader(name, password, sex, class_id, student_code, student_card_number, role_id, reader_status, generate_date, is_deleted) values(?readerName, ?password, ?sex, ?classId, ?studentCode, ?studentCardNumber, ?roleId, ?readerStatus, ?generateDate, ?isDeleted)";
+                    string sql = "insert into reader(name, password, sex, class_id, student_code, student_card_number, role, reader_status, generate_date, is_deleted) values(?readerName, ?password, ?sex, ?classId, ?studentCode, ?studentCardNumber, ?role, ?readerStatus, ?generateDate, ?isDeleted)";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddRange(paras);
                     conn.Open();

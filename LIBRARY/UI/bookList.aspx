@@ -31,13 +31,19 @@
                         <div class="sidebar-tab"><a href="locationList.aspx">馆藏地管理</a></div>
                         <div class="sidebar-tab"><a href="classList.aspx">班级管理</a></div>
                         <div class="sidebar-tab"><a href="gradeList.aspx">年级管理</a></div>
+                        <div class="sidebar-tab"><a href="dataImport.aspx">数据导入</a></div>  
                         <div class="sidebar-tab"><a href="demo.aspx">演示功能</a></div>
 		    </div>
 		    <div class="col-md-10 column">
-		    <h3>图书列表(<%=size%>)</h3>
+                <form style="float:right" name="logout" action="logout.aspx" method='post'>
+                <%string username = (string)HttpContext.Current.Session["user"]; %>
+                用户：<%=username %>
+                <button type="submit" class="btn btn-xs btn-primary" >登出</button>
+            </form>
+		        <h3>图书列表(<%=size%>)</h3>
 
-			  <table style="border-width:0px;border-collapse:collapse;width:100%">
-				<tr style="background-color:#E0E0E0;height:40px;border-width:0px">
+			    <table style="border-width:0px;border-collapse:collapse;width:100%">
+				    <tr style="background-color:#E0E0E0;height:40px;border-width:0px">
 					    <td style="width:9%;border-width:0px;font-weight:bold;text-align:center">标号</td>
 					    <td style="width:19%; border-width:0px;font-weight:bold;text-align:center"> 标识码 </td>
 					    <td style="width:29%; border-width:0px;font-weight:bold;text-align:center"> 书名</td>
@@ -58,10 +64,10 @@
                         {%><tr class="row2" style=""> <%} %>
 				    <!--  <td style="width:3%;border-width:0px;font-weight:bold;text-align:center"><input type='checkbox' value="<%=book.Id%>" class="selectNode"/></td> -->
 				    <td style="width:9%;border-width:0px;text-align:center"><%=book.Id%></td>
-                    <td style="width:19%;border-width:0px;text-align:center"><%=book.Signal_code%></td>
+                    <td style="width:19%;border-width:0px;text-align:center"><%=book.Serial_code%></td>
                     <td style="width:29%;border-width:0px;text-align:center"><%=book.Name%></td>
                     <td style="width:11%;border-width:0px;text-align:center"><%=book.Author%></td>
-                    <td style="width:11%;border-width:0px;text-align:center"><%=book.Price%></td>
+                    <td style="width:11%;border-width:0px;text-align:center"><%=book.Price%>元</td>
                     <td style="width:11%;border-width:0px;text-align:center"><%=book.Status%></td>
                   
                     <td style="width:10%;border-width:0px;font-weight:bold;text-align:center">
@@ -72,6 +78,7 @@
                     </td>		
                 <%} %>
                 </table>
+
 			    <div style="margin:20px 0 0 20px">
 				    <!-- 按钮触发模态框 -->
 				    <button class="btn btn-primary btn-sm" data-toggle="modal"
@@ -80,7 +87,7 @@
 				    </button>
 			    </div>
 
-			    <div class="modal fade" id="addBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin:30px 0 0 24%; width:60%">
+			  <div class="modal fade" id="addBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin:30px 0 0 24%; width:60%">
 			       <div class="modal-dialog">
 			          <div class="modal-content">
 			             <div class="modal-header">
@@ -95,54 +102,61 @@
 
 			             <form action="addBook.aspx" method='post' onsubmit="return checkinput();">
 			             <div class="modal-body">
-			         	    <div style="margin: 20px 0 0 0">
-			         		    图书ISBN :  <input style="margin-left:22px" type='text' name='ISBN' id='ISBN'/>
+			         	    <div style="margin: 15px 0 0 0">
+			         		    图书ISBN:<input style="margin-left:12px" type='text' name='ISBN' id='ISBN'/>
 			         	    </div>
 
-			         	     <div style="margin: 20px 0 0 10px">
-			         	        标识码 :  <input style="margin-left:22px" type='text' name='signal_code' id='signal_code'/>
+			         	     <div style="margin: 15px 0 0 0px">
+			         	        标识码:<input style="margin-left:28px" type='text' name='signal_code' id='signal_code'/>
 			         	     </div>
 
-			         	     <div style="margin: 20px 0 0 0">
-			         		    书名:  <input style="margin-left:22px" type='text' name='name' id='name'/>
+			         	     <div style="margin: 15px 0 0 0">
+			         		    书名:<input style="margin-left:40px" type='text' name='name' id='name'/>
 			         	    </div>
 
-                             <div style="margin: 20px 0 0 0">
-			         		    作者:  <input style="margin-left:22px" type='text' name='author' id='author'/>
+                             <div style="margin: 15px 0 0 0">
+			         		    作者:<input style="margin-left:40px" type='text' name='author' id='author'/>
 			         	    </div>
 
-                             <div style="margin: 20px 0 0 0">
-			         	        出版商:  <input style="margin-left:22px" type='text' name='publisher_name' id='publisher_name'/>
+                             <div style="margin: 15px 0 0 0">
+			         	        出版商:<input style="margin-left:28px" type='text' name='publisher_name' id='publisher_name'/>
 			         	    </div>
 
-                             <div style="margin: 20px 0 0 0">
-			         	        出版商ID:  <input style="margin-left:22px" type='text' name='publisher_id' id='publisher_id'/>
+                            <!--<div style="margin: 15px 0 0 0">
+			         	        出版商ID:<input style="margin-left:16px" type='text' name='publisher_id' id='publisher_id'/>
+			         	    </div>-->
+
+                             <div style="margin: 15px 0 0 0">
+			         	        出版日期:<input style="margin-left:16px" type='text' name='publish_date' id='publish_date'/>
 			         	    </div>
 
-                             <div style="margin: 20px 0 0 0">
-			         	        出版日期:  <input style="margin-left:22px" type='text' name='publish_date' id='publish_date'/>
-			         	    </div>
-
-                             <div style="margin: 20px 0 0 0">
-			         	        价格:  <input style="margin-left:22px" type='text' name='price' id='price'/>
+                             <div style="margin: 15px 0 0 0">
+			         	        价格:<input style="margin-left:40px" type='text' name='price' id='price'/>
 			         	    </div>
 
                          
-			         	     <div style="margin: 20px 0 0 0">
-			         	        语言:   <select id="language" name="language">
+			         	     <div style="margin: 15px 0 0 0">
+			         	        语言:<select  style="margin-left:40px" id="language" name="language">
                                      <option value="Chinese">中文</option>
                                      <option value="English">英文</option>
 			         	            </select>
 			         	    </div>
 
-                             <div style="margin: 20px 0 0 0">
-			         	        保存状态:  <input style="margin-left:22px" type='text' name='status' id='status'/>
+                           <!--  <div style="margin: 15px 0 0 0">
+			         	        保存状态:<input style="margin-left:16px" type='text' name='status' id='status'/>
+			         	    </div>-->
+
+                            <div style="margin: 15px 0 0 0">
+			         	        索引号:<input style="margin-left:29px" type='text' name='index_id' id='index_id'/>
 			         	    </div>
 
-                             <div style="margin: 20px 0 0 0">
-			         	        地点:  <input style="margin-left:22px" type='text' name='location_id' id='location_id'/>
+                              <div style="margin: 15px 0 0 0">
+			         	        页码数:<input style="margin-left:29px" type='text' name='page_number' id='page_number'/>
 			         	    </div>
 
+                           <!--  <div style="margin: 15px 0 0 0">
+			         	        地点:<input style="margin-left:40px" type='text' name='location_id' id='location_id'/>
+			         	    </div>-->
 			            </div>
 
 			             <div class="modal-footer">
@@ -157,11 +171,9 @@
 			          </div>
 
 			    </div>
-
 		    </div>
 	    </div>
+       </div>
     </div>
-    </div>
-
 </body>
 </html>

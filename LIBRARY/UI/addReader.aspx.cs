@@ -36,7 +36,7 @@ namespace LIBRARY.UI
                 }
 
                 string readerName = Request.Form["reader_name"];
-                string password = Request.Form["password"];
+                string password = Request.Form["pwd1"];
                 string sex = Request.Form["sex"];
                 string classId = Request.Form["class_id"];
                 string studentCode = Request.Form["student_code"];
@@ -51,7 +51,16 @@ namespace LIBRARY.UI
                 kv.Add("classId", classId);
                 kv.Add("studentCode", studentCode);
                 kv.Add("studentCardNumber", studentCardNumber);
-                kv.Add("roleId", roleId);
+                string role = "";
+                if(roleId == "5")
+                {
+                    role = "学生";
+                }
+                if (roleId == "1")
+                {
+                    role = "校长";
+                }
+                kv.Add("roleId", role);
                 bool isSuccess = adminBLL.addReader(kv);
                 Response.Redirect("readerList.aspx");
             }

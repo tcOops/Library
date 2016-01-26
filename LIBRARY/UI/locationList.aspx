@@ -32,9 +32,15 @@
                     <div class="sidebar-tab-active"><a href="locationList.aspx">馆藏地管理</a></div>
                     <div class="sidebar-tab"><a href="classList.aspx">班级管理</a></div>
                     <div class="sidebar-tab"><a href="gradeList.aspx">年级管理</a></div>
+                    <div class="sidebar-tab"><a href="dataImport.aspx">数据导入</a></div>  
                     <div class="sidebar-tab"><a href="demo.aspx">演示功能</a></div>                 
 		</div>
 		<div class="col-md-10 column">
+            <form style="float:right" name="logout" action="logout.aspx" method='post'>
+                <%string username = (string)HttpContext.Current.Session["user"]; %>
+                用户：<%=username %>
+                <button type="submit" class="btn btn-xs btn-primary" >登出</button>
+            </form>
 		    <h3>馆藏地列表(<%=size%>)</h3>
 			<table style="border-width:0px;border-collapse:collapse;width:100%">
 				<tr style="background-color:#E0E0E0;height:40px;border-width:0px">
@@ -76,7 +82,7 @@
 				</button>
 			</div>
 
-			<div class="modal fade" id="addLocation" tabindex="-1" role="dialog"
+				<div class="modal fade" id="addLocation" tabindex="-1" role="dialog"
 			  aria-labelledby="myModalLabel" aria-hidden="true" style="margin:30px 0 0 24%; width:60%">
 			   <div class="modal-dialog">
 			      <div class="modal-content">
@@ -92,22 +98,22 @@
 
 			         <form action="addLocation.aspx" method='post' onsubmit="return checkinput();">
 			             <div class="modal-body">
-			         	    <div style="margin: 10px 0 0 0">
-			         		   馆藏地地址 :  <input style="margin-left:8px" type='text' name='location' id='location'/>
+			         	    <div style="margin: 15px 0 0 0">
+			         		   馆藏地地址 :  <input style="margin-left:4px" type='text' name='location' id='location'/>
 			         	    </div>
 
-			         	     <div style="margin: 25px 0 0 0px">
-			         	        门禁IP： <input style="margin-left:30px" type='text' name='doorIp' id='doorIp'/>
+			         	     <div style="margin: 15px 0 0 0px">
+			         	        门禁IP： <input style="margin-left:24px" type='text' name='doorIp' id='doorIp'/>
 			         	     </div>
 
-			         	     <div style="margin: 20px 0 0 0">
-			         		    RFID IP:  <input style="margin-left:31px" type='text' name='RFIDIp' id='RFIDIp'/>
+			         	     <div style="margin: 15px 0 0 0">
+			         		    RFID IP:  <input style="margin-left:26px" type='text' name='RFIDIp' id='RFIDIp'/>
 			         	    </div>
 
                            
 
-                            <div style="margin: 20px 0 0 0">
-			         		    代码编号:  <input style="margin-left:25px" type='text' name='code' id='code' value=""/>
+                            <div style="margin: 15px 0 0 0">
+			         		    代码编号:  <input style="margin-left:20px" type='text' name='code' id='code' value=""/>
 			         	    </div>		         	  
 			            </div>
 
@@ -120,9 +126,8 @@
 			                </button>
 			             </div>
 			        </form>
-
 			      </div>
-			</div>
+			    </div>
 		   </div>
 		</div>
 	</div>

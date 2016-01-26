@@ -11,6 +11,24 @@
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/index.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
+
+    <script type="text/javascript">  
+        function check() {          
+            var passwd1=document.my_form.pwd1.value;  
+            var passwd2=document.my_form.pwd2.value;
+        
+            if (passwd1 =="") {
+                document.getElementById("explain1").innerText = "密码空，请输入";
+                return false;
+            }
+            if (passwd1 != passwd2) {
+                document.getElementById("explain1").innerText = "";
+                document.getElementById("explain2").innerText = "密码不一致，请输入";
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 
 <body>
@@ -32,10 +50,16 @@
                     <div class="sidebar-tab"><a href="circulationList.aspx">流通信息管理</a></div>
                     <div class="sidebar-tab"><a href="locationList.aspx">馆藏地管理</a></div> 
                     <div class="sidebar-tab"><a href="classList.aspx">班级管理</a></div>
-                    <div class="sidebar-tab"><a href="gradeList.aspx">年级管理</a></div>      
+                    <div class="sidebar-tab"><a href="gradeList.aspx">年级管理</a></div> 
+                    <div class="sidebar-tab"><a href="dataImport.aspx">数据导入</a></div>      
                     <div class="sidebar-tab"><a href="demo.aspx">演示功能</a></div>
 		</div>
 		<div class="col-md-10 column">
+            <form style="float:right" name="logout" action="logout.aspx" method='post'>
+                <%string username = (string)HttpContext.Current.Session["user"]; %>
+                用户：<%=username %>
+                <button type="submit" class="btn btn-xs btn-primary" >登出</button>
+            </form>
 		    <h3>读者列表(<%=size %>)</h3>
 		
 			<table style="border-width:0px;border-collapse:collapse;width:100%">
@@ -62,7 +86,7 @@
 				    <td style="width:15%;border-width:0px;text-align:center;border-width:0px;text-align:center;border-width:0px;text-align:center"><%=reader.Name%></td>
 				    <td style="width:16%;border-width:0px;text-align:center;border-width:0px;text-align:center"><%=reader.Class_id%></td>
 				    <td style="width:27%;border-width:0px;text-align:center"><%=reader.Student_card_number%></td>
-				    <td style="width:12%;border-width:0px;text-align:center"><%=reader.Role_id%></td>
+				    <td style="width:12%;border-width:0px;text-align:center"><%=reader.Role%></td>
 				    <td style="width:13%;border-width:0px;text-align:center"><%=reader.Reader_status%></td>
                     <td style="width:9%;border-width:0px;font-weight:bold;text-align:center">
 				        <form action="readerList.aspx" method='post'>
@@ -95,33 +119,33 @@
 			            </h4>
 			         </div>
 
-			         <form action="addReader.aspx" method='post' onsubmit="return checkinput();">
+			         <form name="my_form" action="addReader.aspx" method='post' onsubmit="return check();">
 			             <div class="modal-body">
-			         	    <div style="margin: 10px 0 0 0">
-			         		    姓名 :  <input style="margin-left:15px" type='text' name='reader_name' id='reader_name'/>
+			         	    <div style="margin: 15px 0 0 0">
+			         		    姓名:<input style="margin-left:40px" type='text' name='reader_name' id='reader_name'/>
 			         	    </div>
 
-			         	     <div style="margin: 25px 0 0 0px">
-			         	        性别： &nbsp;<select id="sex_select" name="sex">
+			         	     <div style="margin: 15px 0 0 0px">
+			         	        性别:<select style="margin-left:40px" id="sex_select" name="sex">
                                      <option value="男">男</option>
                                      <option value="女">女</option>
 			         	            </select>
 			         	     </div>
 
-			         	     <div style="margin: 20px 0 0 0">
-			         		    班级:  <input style="margin-left:17px" type='text' name='class_id' id='class_id'/>
+			         	     <div style="margin: 15px 0 0 0">
+			         		    班级:<input style="margin-left:40px" type='text' name='class_id' id='class_id'/>
 			         	    </div>
 
-                             <div style="margin: 20px 0 0 0">
-			         		    学籍号:  <input style="margin-left:12px" type='text' name='student_code' id='student_code'/>
+                             <div style="margin: 15px 0 0 0">
+			         		    学籍号:<input style="margin-left:28px" type='text' name='student_code' id='student_code'/>
 			         	    </div>
 
-                             <div style="margin: 20px 0 0 0">
-			         		    学生卡号:  <input style="margin-left:8px" type='text' name='student_card_number' id='student_card_number' value="1"/>
+                             <div style="margin: 15px 0 0 0">
+			         		    学生卡号:<input style="margin-left:16px" type='text' name='student_card_number' id='student_card_number' value="1"/>
 			         	    </div>
 
-			         	     <div style="margin: 20px 0 0 0">
-			         	        读者身份:   <select id="role_id" name="role_id">
+			         	     <div style="margin: 15px 0 0 0">
+			         	        读者身份:<select style="margin-left:16px" id="role_id" name="role_id">
                                      <option value="1">校长</option>
                                      <option value="2">年级主任</option>
                                      <option value="3">班主任</option>
@@ -130,14 +154,28 @@
 			         	            </select>
 			         	    </div>
 
-                            <div style="margin: 20px 0 0 0">
-			         		    初始密码:  <input style="margin-left:8px" type='password' name='password' id='password' />
+                            <div style="margin: 13px 0 0 0">
+			         		    初始密码: 
+                                <input style="margin-left:16px" type='password' name='pwd1' id='pwd1'/>
+                                <p style= "color: red; border-style: solid; border-width:0" id="explain1"></p>
 			         	    </div>
 
-                            <div style="margin: 20px 0 0 0">
-                                上传头像：<input id="File1" runat="server" name="UpLoadPicture" type="file" /> 
+                            <div style="margin: 13px 0 0 0">
+			         		    确认密码:
+                                <input style="margin-left:16px" type='password' name='pwd2' id='pwd2' onblur="check()" />
+                                <p style= "color: red; border-style: solid; border-width:0" id="explain2" ></p>
+			         	    </div>
+
+                            <div style="margin: 15px 0 0 0">
+                            <div style="float:left">
+                                上传头像:
                             </div>
+                            <div style="float:left">
+                                <input style="margin-left:16px"  id="File1" name="UpLoadPicture" type="file" /> 
+                             </div>
+                             </div>
 			            </div>
+                         <br>
 
 			             <div class="modal-footer">
 			                <button type="button" class="btn btn-default"

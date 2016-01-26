@@ -25,7 +25,7 @@ namespace LIBRARY.Models
             set;
         }
 
-        public int Class_id
+        public string Class_id //班级代号
         {
             get;
             set;
@@ -49,7 +49,7 @@ namespace LIBRARY.Models
             set;
         }
 
-        public int Role_id
+        public string Role
         {
             get;
             set;

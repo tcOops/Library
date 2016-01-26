@@ -15,7 +15,7 @@ namespace LIBRARY.DAL
         {
             //string connectString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["mysqlConnectString"].ToString();
             MySqlConnection conn = new MySqlConnection(connectString);
-            string sql = "SELECT id, ISBN, signal_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, location_id, is_deleted from book";
+            string sql = "SELECT id, ISBN, serial_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, location_id, is_deleted from book";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             MySqlDataReader dr;
             List<book> bookList = new List<book>();
@@ -29,7 +29,7 @@ namespace LIBRARY.DAL
 
                     book.Id = Convert.ToInt32(dr["id"]);
                     book.ISBN = Convert.ToString(dr["ISBN"]);
-                    book.Signal_code = Convert.ToString(dr["signal_code"]);
+                    book.Serial_code = Convert.ToString(dr["serial_code"]);
                     book.Name = Convert.ToString(dr["name"]);
                     book.Author = Convert.ToString(dr["author"]);
                     book.Publisher_name = Convert.ToString(dr["publisher_name"]);
@@ -90,7 +90,7 @@ namespace LIBRARY.DAL
             MySqlParameter[] paras =
             {
                      new MySqlParameter("?ISBN", kv["ISBN"]),
-                     new MySqlParameter("?signal_code", kv["signal_code"]),
+                     new MySqlParameter("?serial_code", kv["serial_code"]),
                      new MySqlParameter("?name", kv["name"]),
                      new MySqlParameter("?author", kv["author"]),
                      new MySqlParameter("?publisher_name", kv["publisher_name"]),
@@ -99,7 +99,9 @@ namespace LIBRARY.DAL
                      new MySqlParameter("?price", kv["price"]),
                      new MySqlParameter("?language",kv["language"]),
                      new MySqlParameter("?status", kv["status"]),
-                     new MySqlParameter("?location_id",kv["location_id"]),
+                     new MySqlParameter("?location_id", kv["location_id"]),
+                     new MySqlParameter("?index_id", kv["index_id"]),
+                     new MySqlParameter("?page_number", kv["page_number"]),
                      new MySqlParameter("?is_deleted", "0")
             };
 
@@ -107,7 +109,7 @@ namespace LIBRARY.DAL
             {
                 using (MySqlConnection conn = new MySqlConnection(connectString))
                 {
-                    string sql = "insert into book(ISBN, signal_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, location_id, is_deleted) values(?ISBN,?signal_code,?name,?author,?publisher_name,?publisher_id,?publish_date,?price,?language,?status,?location_id,?is_deleted)";
+                    string sql = "insert into book(ISBN, serial_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, location_id, index_id, page_number, is_deleted) values(?ISBN,?serial_code,?name,?author,?publisher_name,?publisher_id,?publish_date,?price,?language,?status,?location_id, ?index_id, ?page_number, ?is_deleted)";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddRange(paras);
                     conn.Open();

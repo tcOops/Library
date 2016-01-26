@@ -9,20 +9,19 @@ namespace LIBRARY.BLL
 {
     public class AdminBLL
     {
-        public bool adminLogin(string username, string password)
+        public int adminLogin(string username, string password)
         {
-            bool isSuccess = false;
             AdminDAL adminDAL = new AdminDAL();
             admin admin = adminDAL.getAdminInfo();
             if (admin == null)
             {
-                return false;
+                return -1;
             }
             if (username == admin.alias && password == admin.password)
             {
-                return true;
+                return admin.id;
             }
-            return isSuccess;
+            return -1;
         }
 
         public List<reader> getReaders()

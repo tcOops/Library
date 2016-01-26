@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>ATM图书管理系统主页</title>
+    <title>年级管理</title>
     <script src="/static/js/jquery-1.11.3.min.js"></script>
     <link href="/static/css/bootstrap.css" media="all" rel="stylesheet"/>
 	<script src="/static/js/bootstrap.min.js"></script>
@@ -32,9 +32,15 @@
                     <div class="sidebar-tab"><a href="locationList.aspx">馆藏地管理</a></div>
                     <div class="sidebar-tab"><a href="classList.aspx">班级管理</a></div>
                     <div class="sidebar-tab-active"><a href="gradeList.aspx">年级管理</a></div>
+                    <div class="sidebar-tab"><a href="dataImport.aspx">数据导入</a></div>  
                     <div class="sidebar-tab"><a href="demo.aspx">演示功能</a></div>
 		</div>
 	    <div class="col-md-10 column">
+            <form style="float:right" name="logout" action="logout.aspx" method='post'>
+                <%string username = (string)HttpContext.Current.Session["user"]; %>
+                用户：<%=username %>
+                <button type="submit" class="btn btn-xs btn-primary">登出</button>
+            </form>
 	        <h3>年级列表(<%=size %>)</h3>
 
 	    <table style="border-width:0px;border-collapse:collapse;width:100%">
@@ -71,16 +77,17 @@
 	    </div>
 
         <div class="col-md-8 column" style="text-align:center;margin-left:20%;margin-top:20%">
-        <form action="addGrade.aspx" method='post' onsubmit="return checkinput();">
+        <form action="addGrade.aspx" method='post' onsubmit="">
 			 <div style="text-align:center">
 			   添加:
                <input  type='text' name='grade_number'/>
                年级
+              </div>
 			  <div  style="margin-top:3%;text-align:center">
-			     <button type="reset">
+			     <button type="reset" class="btn btn-default">
                      取消
 			     </button>
-			     <button type="submit">
+			     <button type="submit" class="btn btn-primary">
 			       确定添加
 			     </button>
               </div>

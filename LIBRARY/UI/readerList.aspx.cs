@@ -15,6 +15,10 @@ namespace LIBRARY.UI
         {
             if (!IsPostBack)
             {
+                if (HttpContext.Current.Session["user"] == null)
+                {
+                    Response.Redirect("login.aspx");
+                }
                 //Response.Redirect("login.aspx");
             }
         }

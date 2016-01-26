@@ -23,9 +23,12 @@ namespace LIBRARY.UI
                     AdminBLL adminBLL = new AdminBLL();
                     string userName = Request.Form["username"];
                     string pwd = Request.Form["password"];
-                    bool isSuccess = adminBLL.adminLogin(userName, pwd);
-                    if (isSuccess == true)
+                    int userId = adminBLL.adminLogin(userName, pwd);
+                    if (userId != -1)
                     {
+                        HttpContext.Current.Session["user"] = userName;
+                        HttpContext.Current.Session["userId"] = userId;
+                        HttpContext.Current.Session.Timeout = 60;
                         Response.Redirect("home.aspx");
                     }
                     else

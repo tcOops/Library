@@ -21,7 +21,7 @@
       </div>
     </div>
 
-  <div style="margin:15% 0 -50px 39%;">
+  <div style="margin:15% 0 -50px 30%;">
     <h3>
       欢迎进入ATM图书管理系统管理界面 
     </h3>

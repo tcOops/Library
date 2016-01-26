@@ -19,7 +19,13 @@ namespace LIBRARY.Models
             set;
         }
 
-        public string Signal_code
+        public string Signal_code //RFID 传过来的code
+        {
+            get;
+            set;
+        }
+
+        public string Sn_code //RFID标签的序列号
         {
             get;
             set;
@@ -80,6 +86,36 @@ namespace LIBRARY.Models
         }
 
         public Boolean Is_deleted
+        {
+            get;
+            set;
+        }
+
+        public string Serial_code //检索使用
+        {
+            get;
+            set;
+        }
+
+        public int Oper_id
+        {
+            get;
+            set;
+        }
+
+        public string Op_time
+        {
+            get;
+            set;
+        }
+
+        public string Index_id
+        {
+            get;
+            set;
+        }
+
+        public int Page_number
         {
             get;
             set;

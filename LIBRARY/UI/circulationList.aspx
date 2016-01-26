@@ -34,9 +34,15 @@
                     <div class="sidebar-tab"><a href="locationList.aspx">馆藏地管理</a></div>
                     <div class="sidebar-tab"><a href="classList.aspx">班级管理</a></div>
                     <div class="sidebar-tab"><a href="gradeList.aspx">年级管理</a></div>
+                    <div class="sidebar-tab"><a href="dataImport.aspx">数据导入</a></div>  
                     <div class="sidebar-tab"><a href="demo.aspx">演示功能</a></div>
 		</div>
 		<div class="col-md-10 column">
+            <form style="float:right" name="logout" action="logout.aspx" method='post'>
+                <%string username = (string)HttpContext.Current.Session["user"]; %>
+                用户：<%=username %>
+                <button type="submit" class="btn btn-xs btn-primary" >登出</button>
+            </form>
 		<h3>借阅记录(<%=size %>)</h3>
 
 		    <table style="border-width:0px;border-collapse:collapse;width:100%">

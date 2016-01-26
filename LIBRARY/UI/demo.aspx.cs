@@ -13,7 +13,14 @@ namespace LIBRARY.UI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (HttpContext.Current.Session["user"] == null)
+                {
+                    Response.Redirect("login.aspx");
+                }
+                //Response.Redirect("login.aspx");
+            }
         }
 
         public reader getReaderInfo(string student_card_number)

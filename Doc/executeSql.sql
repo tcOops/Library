@@ -5,15 +5,21 @@ create table if not exists book(
        id int(10) not null primary key auto_increment,
        ISBN varchar(60) not null default "",
        signal_code varchar(60),
+       sn_code varchar(50),
        name varchar(200) not null default "",
        author varchar(60) not null default "",
        publisher_name varchar(200),
        publisher_id int(10) not null default 0,
-       publish_date Date,
+       publish_date varchar(50),
        price double,
        language varchar(50),
        status varchar(60),
-       location_id int(10)  
+       location_id int(10),
+       serial_code varchar(50),
+       oper_id int(4),
+       op_time varchar(50),    
+       index_id varchar(20),
+       page_number int(8)
 );
 
 -- drop table bookstoreLocation;
@@ -77,11 +83,11 @@ create table if not exists reader(
         id int(10) not null primary key auto_increment,
         name varchar(60),
         sex varchar(20),
-        class_id int(4),
+        class_id varchar(15),
         student_code varchar(60),
         student_card_number varchar(60),
         password varchar(60),
-        role_id int(4) not null default 1,
+        role int(4) not null default "学生",
         reader_status varchar(60),
         generate_date Date,
         is_deleted boolean
