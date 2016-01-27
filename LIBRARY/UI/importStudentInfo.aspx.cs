@@ -39,33 +39,34 @@ namespace LIBRARY.UI
                     if (!File.Exists(filePos))
                     {
                         postedFile.SaveAs(filePos);
-                    }
 
-                    DataTable dt = getExcel(filePos);
-                    foreach(DataRow dr in dt.Rows)
-                    {
-                        string studentCardNumber= Convert.ToString(dr[0]);
-                        string readerName = Convert.ToString(dr[1]);
-                        string sex = Convert.ToString(dr[2]);
-                        string classCode = Convert.ToString(dr[3]);
-                        string studentCode = Convert.ToString(dr[5]);
+                        DataTable dt = getExcel(filePos);
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            string studentCardNumber = Convert.ToString(dr[0]);
+                            string readerName = Convert.ToString(dr[1]);
+                            string sex = Convert.ToString(dr[2]);
+                            string classCode = Convert.ToString(dr[3]);
+                            string studentCode = Convert.ToString(dr[5]);
 
-                        AdminBLL adminBLL = new AdminBLL();
-                        Dictionary<string, string> kv = new Dictionary<string, string>();
-                        kv.Add("readerName", readerName);
-                        kv.Add("password", "123");
-                        kv.Add("sex", sex);
-                        kv.Add("classId", classCode);
-                        kv.Add("studentCode", studentCode);
-                        kv.Add("studentCardNumber", studentCardNumber);
-                        kv.Add("role", "学生");
+                            AdminBLL adminBLL = new AdminBLL();
+                            Dictionary<string, string> kv = new Dictionary<string, string>();
+                            kv.Add("readerName", readerName);
+                            kv.Add("password", "123");
+                            kv.Add("sex", sex);
+                            kv.Add("classId", classCode);
+                            kv.Add("studentCode", studentCode);
+                            kv.Add("studentCardNumber", studentCardNumber);
+                            kv.Add("role", "学生");
 
-                        bool status = adminBLL.addReader(kv);
+                            bool status = adminBLL.addReader(kv);
+                        }
                     }
                     Response.Redirect("dataImport.aspx");
                 }
             }
         }
+
 
         //加载Excel 
         public static DataTable getExcel(string filePos)
