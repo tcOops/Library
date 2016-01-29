@@ -10,6 +10,38 @@
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/index.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
+
+    <script type="text/javascript">  
+        function checkinput() {          
+            var location = $('#location').val()
+            var doorIp = $('#doorIp').val()
+            var RFID_ip = $('#RFIDIp').val()
+            var code = $('#code').val()
+            var snCode = $('#snCode').val()
+        
+            if (location =="") {
+                alert("请输入馆藏地终端地址");
+                return false;
+            }
+            if (doorIp == "") {
+                alert("请输入门禁IP");
+                return false;
+            }
+            if (RFID_ip == "") {
+                alert("请输入RFID IP");
+                return false;
+            }
+            if (code == "") {
+                alert("请输入RFID IP的代码编号");
+                return false;
+            }
+            if (snCode == "") {
+                alert("请输入SN code");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 
 <body>
@@ -28,8 +60,8 @@
 		<div class="col-md-2 column" style="background:rgba(198, 190, 204, 1)">
 					<div class="sidebar-tab"><a href="readerList.aspx">读者管理</a></div>
 					<div class="sidebar-tab"><a href="bookList.aspx">图书管理</a></div>
-                    <div class="sidebar-tab"><a href="circulationList.aspx">流通信息管理</a></div>
-                    <div class="sidebar-tab-active"><a href="locationList.aspx">馆藏地管理</a></div>
+                    <div class="sidebar-tab"><a href="circulationList.aspx">借阅记录</a></div>
+                    <div class="sidebar-tab-active"><a href="locationList.aspx">馆藏终端</a></div>
                     <div class="sidebar-tab"><a href="classList.aspx">班级管理</a></div>
                     <div class="sidebar-tab"><a href="gradeList.aspx">年级管理</a></div>
                     <div class="sidebar-tab"><a href="dataImport.aspx">数据导入</a></div>  
@@ -49,8 +81,9 @@
 					<td style="width:8%;border-width:0px;font-weight:bold;text-align:center">标号</td>
 					<td style="width:14%; border-width:0px;font-weight:bold;text-align:center">具体位置</td>
 					<td style="width:15%; border-width:0px;font-weight:bold;text-align:center"> 门禁IP </td>
-					<td style="width:25%; border-width:0px;font-weight:bold;text-align:center"> RFID IP</td>
-					<td style="width:10%; border-width:0px;font-weight:bold;text-align:center"> 相关代号</td>
+					<td style="width:15%; border-width:0px;font-weight:bold;text-align:center"> RFID IP</td>
+					<td style="width:10%; border-width:0px;font-weight:bold;text-align:center"> RFID IP_代码编号</td>
+                    <td style="width:10%; border-width:0px;font-weight:bold;text-align:center"> SN Code</td>
 					<td style="width:8%;border-width:0px;font-weight:bold;text-align:center">操作</td>
 				</tr>
 			</table>
@@ -65,12 +98,13 @@
 				    <td style="width:8%;border-width:0px;text-align:center"><%=location.Id%></td>
 				    <td style="width:14%;border-width:0px;text-align:center;border-width:0px;text-align:center;border-width:0px;text-align:center"><%=location.Location%></td>
 				    <td style="width:15%;border-width:0px;text-align:center;border-width:0px;text-align:center"><%=location.Door_ip%></td>
-				    <td style="width:25%;border-width:0px;text-align:center"><%=location.RFID_ip%></td>
+				    <td style="width:15%;border-width:0px;text-align:center"><%=location.RFID_ip%></td>
 				    <td style="width:10%;border-width:0px;text-align:center"><%=location.Code%></td>
+                    <td style="width:10%;border-width:0px;text-align:center"><%=location.Sn_code%></td>
                     <td style="width:8%;border-width:0px;font-weight:bold;text-align:center">
 				        <form action="readerList.aspx" method='post'>
 					        <input style="display:none;" id="nodeIdRes" name="nodeIdRes" value="<%=location.Id%>" />
-					        <input type='submit' value="删除" class="selectNode"/>
+					        <input type='submit' disabled="disabled"  value="删除" class="selectNode"/>
 				        </form>
                     </td>
                 </tr>
@@ -80,7 +114,7 @@
 			<div style="margin:20px 0 0 20px">
 				<button class="btn btn-primary btn-sm" data-toggle="modal"
 				   data-target="#addLocation">
-				      添加馆藏地
+				      添加馆藏终端
 				</button>
 			</div>
 
@@ -94,29 +128,33 @@
 			                  &times;
 			            </button>
 			            <h4 class="modal-title" id="myModalLabel">
-			               添加馆藏地
+			               添加馆藏终端
 			            </h4>
 			         </div>
 
 			         <form action="addLocation.aspx" method='post' onsubmit="return checkinput();">
 			             <div class="modal-body">
 			         	    <div style="margin: 15px 0 0 0">
-			         		   馆藏地地址 :  <input style="margin-left:4px" type='text' name='location' id='location'/>
+			         		   馆藏终端位置 :  <input style="margin-left:28px" type='text' name='location' id='location'/>
 			         	    </div>
 
 			         	     <div style="margin: 15px 0 0 0px">
-			         	        门禁IP： <input style="margin-left:24px" type='text' name='doorIp' id='doorIp'/>
+			         	        门禁IP： <input style="margin-left:60px" type='text' name='doorIp' id='doorIp'/>
 			         	     </div>
 
 			         	     <div style="margin: 15px 0 0 0">
-			         		    RFID IP:  <input style="margin-left:26px" type='text' name='RFIDIp' id='RFIDIp'/>
+			         		    RFID IP:  <input style="margin-left:63px" type='text' name='RFIDIp' id='RFIDIp'/>
 			         	    </div>
 
                            
 
                             <div style="margin: 15px 0 0 0">
-			         		    代码编号:  <input style="margin-left:20px" type='text' name='code' id='code' value=""/>
-			         	    </div>		         	  
+			         		    RFID IP_代码编号:  <input style="margin-left:10px" type='text' name='code' id='code' value=""/>
+			         	    </div>	
+                             
+                            <div style="margin: 15px 0 0 0">
+			         		    SN Code:  <input style="margin-left:55px" type='text' name='snCode' id='snCode' value=""/>
+			         	    </div>		  	         	  
 			            </div>
 
 			             <div class="modal-footer">

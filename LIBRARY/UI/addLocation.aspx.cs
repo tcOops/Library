@@ -18,6 +18,7 @@ namespace LIBRARY.UI
                 string doorIp = Request.Form["doorIp"];
                 string RFIDIp = Request.Form["RFIDIp"];
                 string code = Request.Form["code"];
+                string snCode = Request.Form["snCode"];
 
                 AdminBLL adminBLL = new AdminBLL();
                 Dictionary<string, string> kv = new Dictionary<string, string>();
@@ -25,6 +26,7 @@ namespace LIBRARY.UI
                 kv.Add("door_ip", doorIp);
                 kv.Add("RFID_ip", RFIDIp);
                 kv.Add("code", code);
+                kv.Add("sn_code", snCode);
                 bool isSuccess = adminBLL.addLocation(kv);
                 Response.Redirect("locationList.aspx");
             }

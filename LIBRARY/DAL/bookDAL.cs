@@ -17,7 +17,7 @@ namespace LIBRARY.DAL
         {
             //string connectString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["mysqlConnectString"].ToString();
             MySqlConnection conn = new MySqlConnection(connectString);
-            string sql = "SELECT id, ISBN, serial_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, location_id, is_deleted from book where is_deleted = 0 limit 100";
+            string sql = "SELECT id, ISBN, serial_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, location_id, is_deleted, sn_code, signal_code from book where is_deleted = 0 limit 100";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             MySqlDataReader dr;
             List<book> bookList = new List<book>();
@@ -42,6 +42,8 @@ namespace LIBRARY.DAL
                     book.Status = Convert.ToString(dr["status"]);
                     book.Location_id = Convert.ToInt32(dr["location_id"]);
                     book.Is_deleted = Convert.ToBoolean(dr["is_deleted"]);
+                    book.Sn_code = Convert.ToString(dr["sn_code"]);
+                    book.Signal_code = Convert.ToString(dr["signal_code"]);
 
                     bookList.Add(book);
                 }
@@ -68,7 +70,7 @@ namespace LIBRARY.DAL
             {
                 using (MySqlConnection conn = new MySqlConnection(connectString))
                 {
-                    string sql = "SELECT id, ISBN, serial_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, location_id, is_deleted from book where is_deleted = 0 and serial_code = {0};";
+                    string sql = "SELECT id, ISBN, serial_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, is_deleted, sn_code, signal_code from book where is_deleted = 0 and serial_code = {0};";
                     sql = string.Format(sql, serialCode);
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     conn.Open();
@@ -87,8 +89,11 @@ namespace LIBRARY.DAL
                         book.Price = Convert.ToInt32(dr["price"]);
                         book.Language = Convert.ToString(dr["language"]);
                         book.Status = Convert.ToString(dr["status"]);
-                        book.Location_id = Convert.ToInt32(dr["location_id"]);
+                        //book.Location_id = Convert.ToInt32(dr["location_id"]);
                         book.Is_deleted = Convert.ToBoolean(dr["is_deleted"]);
+                        book.Sn_code = Convert.ToString(dr["sn_code"]);
+                        book.Signal_code = Convert.ToString(dr["signal_code"]);
+
                         break;
                     }
                 }
@@ -179,7 +184,7 @@ namespace LIBRARY.DAL
             {
                 using (MySqlConnection conn = new MySqlConnection(connectString))
                 {
-                    string sql = "select id, sn_code, ISBN, serial_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, location_id, location_name, is_deleted from book where is_deleted = 0";
+                    string sql = "select id, sn_code, ISBN, serial_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, location_name, is_deleted from book where is_deleted = 0";
                     if (startSN != "")
                     {
                         sql += " and sn_code >= \"" + startSN + "\"";
@@ -207,7 +212,7 @@ namespace LIBRARY.DAL
                         book.Price = Convert.ToInt32(dr["price"]);
                         book.Language = Convert.ToString(dr["language"]);
                         book.Status = Convert.ToString(dr["status"]);
-                        book.Location_id = Convert.ToInt32(dr["location_id"]);
+                       // book.Location_id = Convert.ToInt32(dr["location_id"]);
                         book.Location_name = Convert.ToString(dr["location_name"]);
                         book.Is_deleted = Convert.ToBoolean(dr["is_deleted"]);
                         book.Sn_code = Convert.ToString(dr["sn_code"]);

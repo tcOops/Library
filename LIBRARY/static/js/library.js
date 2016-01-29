@@ -36,18 +36,18 @@ function JsonOfBook(response) {
         +  ' <td style="width:9%;border-width:0px;font-weight:bold;text-align:center">标号</td>'
 		+  '<td style="width:19%; border-width:0px;font-weight:bold;text-align:center"> 标识码 </td>'
 	    +  '<td style="width:29%; border-width:0px;font-weight:bold;text-align:center"> 书名</td>'
-		+  '<td style="width:11%; border-width:0px;font-weight:bold;text-align:center">作者</td>'
-        +  '<td style="width:11%;border-width:0px;font-weight:bold;text-align:center">价格</td>'
-        +  '<td style="width:11%;border-width:0px;font-weight:bold;text-align:center">是否借出</td>'
+		+  '<td style="width:11%; border-width:0px;font-weight:bold;text-align:center">SN Code</td>'
+        +  '<td style="width:11%;border-width:0px;font-weight:bold;text-align:center">RFID Code</td>'
+      //  +  '<td style="width:11%;border-width:0px;font-weight:bold;text-align:center">是否借出</td>'
         +  '<td style="width:10%;border-width:0px;font-weight:bold;text-align:center">操作</td></tr>'
 
 
     tmp += '<tr style="height:40px;border-width:0px"><td style="width:9%;border-width:0px;text-align:center">' + book.Id + '</td>'
     tmp += '<td style="width:19%; border-width:0px;text-align:center">' + book.Serial_code + '</td>'
     tmp += '<td style="width:29%; border-width:0px;text-align:center">' + book.Name + '</td>'
-    tmp += '<td style="width:11%; border-width:0px;text-align:center">' + book.Author + '</td>'
-    tmp += '<td style="width:11%;border-width:0px;text-align:center">' + book.Price + '</td>'
-    tmp += '<td style="width:11%;border-width:0px;text-align:center">' + book.Status + '</td>'
+    tmp += '<td style="width:11%; border-width:0px;text-align:center">' + book.Sn_code + '</td>'
+    tmp += '<td style="width:11%;border-width:0px;text-align:center">' + book.Signal_code + '</td>'
+  //  tmp += '<td style="width:11%;border-width:0px;text-align:center">' + book.Status + '</td>'
     tmp += '<td style="width:10%;border-width:0px;text-align:center"> <button class="btn btn-sm" data-toggle="modal" data-target="#bookSign" onclick=' + '\'showBookInfo('
       + book.Id.toString() + ',\"' + book.Name + '\",\"' + book.Author + '\",\"' + book.Serial_code + '\",\"' + book.Publisher_name
       + '\")\'>标识图书</button></td></tr></table>'
@@ -85,7 +85,7 @@ function showBookInfo(bookId, bookName, bookAuthor, bookSerialCode, bookPublishe
         },
 
         error: function (response) {
-            console.log(response)
+            console.log(response) 
             console.log("Oops,  some errors!")
         }
     })

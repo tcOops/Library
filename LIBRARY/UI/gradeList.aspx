@@ -28,8 +28,8 @@
 		<div class="col-md-2 column" style="background:rgba(198, 190, 204, 1)">
 					<div class="sidebar-tab"><a href="readerList.aspx">读者管理</a></div>
 					<div class="sidebar-tab"><a href="bookList.aspx">图书管理</a></div>
-                    <div class="sidebar-tab"><a href="circulationList.aspx">流通信息管理</a></div>
-                    <div class="sidebar-tab"><a href="locationList.aspx">馆藏地管理</a></div>
+                    <div class="sidebar-tab"><a href="circulationList.aspx">借阅记录</a></div>
+                    <div class="sidebar-tab"><a href="locationList.aspx">馆藏终端</a></div>
                     <div class="sidebar-tab"><a href="classList.aspx">班级管理</a></div>
                     <div class="sidebar-tab-active"><a href="gradeList.aspx">年级管理</a></div>
                     <div class="sidebar-tab"><a href="dataImport.aspx">数据导入</a></div> 
@@ -68,7 +68,7 @@
 				<td style="width:28%;border-width:0px;font-weight:bold;text-align:center">
                 <form action="index.aspx" method='post'>
 					 <input style="display:none;" id="nodeIdRes" name="nodeIdRes" value="<%=grade.Id%>" />
-					 <input type='submit' value="删除" class="selectNode"/>
+					 <input type='submit' disabled="disabled"  value="删除" class="selectNode"/>
 			    </form>
                 </td>
             </tr>

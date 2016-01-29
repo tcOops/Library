@@ -19,7 +19,7 @@ namespace LIBRARY.DAL
             {
                 using (MySqlConnection conn = new MySqlConnection(connectString))
                 {
-                    string sql = "select id, location, door_ip, RFID_ip, code from bookstorelocation where is_deleted = 0";
+                    string sql = "select id, location, door_ip, RFID_ip, code, sn_code from bookstorelocation where is_deleted = 0";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     conn.Open();
                     dr = cmd.ExecuteReader();
@@ -32,6 +32,7 @@ namespace LIBRARY.DAL
                         bookstoreLocation.Door_ip = Convert.ToString(dr["door_ip"]);
                         bookstoreLocation.RFID_ip = Convert.ToString(dr["RFID_ip"]);
                         bookstoreLocation.Code = Convert.ToString(dr["code"]);
+                        bookstoreLocation.Sn_code = Convert.ToString(dr["sn_code"]);
                         locationList.Add(bookstoreLocation);
                     }
                 }
@@ -56,14 +57,15 @@ namespace LIBRARY.DAL
                      new MySqlParameter("?door_ip", kv["door_ip"]),
                      new MySqlParameter("?RFID_ip", kv["RFID_ip"]),
                      new MySqlParameter("?code", kv["code"]),
-                     new MySqlParameter("?is_deleted", "0")
+                     new MySqlParameter("?is_deleted", "0"),
+                     new MySqlParameter("?sn_code", kv["sn_code"])
             };
 
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(connectString))
                 {
-                    string sql = "insert into bookstorelocation(location, door_ip, RFID_ip, code, is_deleted) values(?location, ?door_ip, ?RFID_ip, ?code, ?is_deleted)";
+                    string sql = "insert into bookstorelocation(location, door_ip, RFID_ip, code, is_deleted, sn_code) values(?location, ?door_ip, ?RFID_ip, ?code, ?is_deleted, ?sn_code)";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddRange(paras);
                     conn.Open();

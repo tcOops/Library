@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+﻿#  -*- coding: utf-8 -*-
 __author__ = 'Administrator'
 
 import sys
@@ -44,6 +44,7 @@ class pushDB(object):
         finally:
             pass
 
+
     def getTime(self, sql):
         try:
             self.cursor.execute(sql)
@@ -57,13 +58,14 @@ class pushDB(object):
             pass
 
     def handle(self, doorIp, dateOpen, dateClose,  readerCode, actionDate):
+        print 'what;s sssseeeeeggggggggggggggggggggggg'
         rfidIp = ipList[doorIp]
         sql = "select signal_code, action_date from rfidrecord where action_date >= '{0}' and action_date <= '{1}' and ip= '{2}'".format(dateOpen, dateClose, rfidIp)
-        print sql
+        print sql, 'kkkkkkkkkkkkkkkkk'
         try:
             self.cursor.execute(sql)
             data = self.cursor.fetchall()
-            statical = {}
+            statical = {} #
             bookCodeRes, actionDateRes = '-1', ''
             for each in data:
                 bookCode, actionDate = each[0], each[1]
@@ -91,8 +93,8 @@ class pushDB(object):
                 sql1 = "select status, name from book where signal_code = '{0}'".format(key)
                 self.cursor.execute(sql1)
                 data = self.cursor.fetchone()
-
-                originalSta = 0
+                print "wowowowwowowowowow:", data[0], data[1]
+                originalSta = 0 #在馆
                 if data:
                     bookName = data[1]
                 if data and data[0] == '不在馆': #book in door
@@ -104,7 +106,7 @@ class pushDB(object):
                     print 'aaaaaa2222',sql2
                     self.cursor.execute(sql2)
                     self.db.commit()
-                    sql3 = "update book set status = 'in' where signal_code = '{0}'".format(key)
+                    sql3 = "update book set status = '在馆' where signal_code = '{0}'".format(key)
                     print 'aaaaaa3333',sql3
                     self.cursor.execute(sql3)
                     self.db.commit()
@@ -115,7 +117,7 @@ class pushDB(object):
                     print 'aaaaaa4444',sql2
                     self.cursor.execute(sql2)
                     self.db.commit()
-                    sql3 = "update book set status = 'out' where signal_code = '{0}'".format(key)
+                    sql3 = "update book set status = '不在馆' where signal_code = '{0}'".format(key)
                     print 'aaaaaa5555',sql3
                     self.cursor.execute(sql3)
                     self.db.commit()
@@ -183,7 +185,7 @@ class ReceiveData(tornado.web.RequestHandler):
             pushDb = pushDB()
             sql = '''insert into doorrecord(action, action_date, signal_code,
              door_ip, generate_date, is_deleted, is_demo) values('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6})'''.format('open', actionTime, signalCode, ip, now, 0, 0)
-            print sql
+            #print sql
             pushDb.pushDoorInfo(sql)
         return ResponseCode.SUCCESS
 
@@ -195,7 +197,7 @@ class ReceiveData(tornado.web.RequestHandler):
         ip = self.device.ip
 
         pushDb = pushDB()
-        if sta == '00':
+        if sta == '00': #关门
             sql = "select action_date, action, signal_code, generate_date from doorrecord where door_ip = '{0}' order by id desc limit 1".format(ip)
             data = pushDb.getTime(sql)
             if data and data[1] == 'open':
@@ -205,12 +207,12 @@ class ReceiveData(tornado.web.RequestHandler):
                 nowTime = pieces[0].split('=')[1]
                 signalCode = data[2]
                 systemNowTime = data[3]
-                print nowTime, openTime
+               # print nowTime, openTime
                 t1 = time.mktime(time.strptime(nowTime,'%Y-%m-%d %H:%M:%S'))
                 t2 = time.mktime(time.strptime(openTime,'%Y-%m-%d %H:%M:%S'))
 
                 diff = t1 - t2 if t2 < t1 else t2 - t1
-                print 'dddddddddddddd', t1, t2, diff
+               # print 'dddddddddddddd', t1, t2, diff
                 if diff > 8 or diff < 3: # not the delay time, but the action for closing
                     now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
                     sql = '''insert into doorrecord(action, action_date, signal_code,

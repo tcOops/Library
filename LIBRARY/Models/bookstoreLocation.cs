@@ -48,5 +48,17 @@ namespace LIBRARY.Models
             get;
             set;
         }
+
+        public Boolean Is_deleted
+        {
+            get;
+            set;
+        }
+
+        public string Sn_code
+        {
+            get;
+            set;
+        }
     }
 }

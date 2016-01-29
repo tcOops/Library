@@ -15,6 +15,7 @@ create table if not exists book(
        language varchar(50),
        status varchar(60),
        location_id int(10),
+       location_name varchar(50),
        serial_code varchar(50),
        oper_id int(4),
        op_time varchar(50),    
@@ -30,7 +31,8 @@ create table if not exists bookstoreLocation(
        door_port int(6),
        RFID_ip varchar(60),
        RFID_port int(6),
-       code varchar(20)
+       code varchar(20),
+       sn_code varchar(20)
 );
 
 -- drop table circulation;
@@ -58,7 +60,7 @@ create table if not exists doorRecord(
         action varchar(60),
         action_date Date,
         door_ip varchar(60),
-        generate_date Date,
+        generate_date varchar(50),
         is_deleted boolean
 );
 
