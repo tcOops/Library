@@ -12,6 +12,7 @@
 	<script src="/static/js/index.js"></script>
     <script src="/static/js/library.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css"/>
 
     <script type="text/javascript">  
         function check() {          
@@ -39,11 +40,11 @@
             
 <div class="" style="margin:30px 20px 20px 25px">
 
-	<div style="text-align:center; padding-left:92px; background:none repeat scroll 0% 0% #C9F0DD;height:60px">
+	<div style="text-align:center; padding-left:92px; background:none repeat scroll 0% 0% #C9F0C3;height:60px">
 		<h4 style="text-align:center; padding:20px 0 0 30px;">管理员控制页面</h4>
 	</div>
 	<div class="row clearfix" style="margin:20px 0 20px 0px">
-		<div class="col-md-2 column" style="background:rgba(198, 190, 204, 1)">
+		<div class="col-md-2 column" style="background:#C9F0C3">
 					<div class="sidebar-tab"><a href="readerList.aspx">读者管理</a></div>
 					<div class="sidebar-tab"><a href="bookList.aspx">图书管理</a></div>
                     <div class="sidebar-tab"><a href="circulationList.aspx">借阅记录</a></div>
@@ -62,18 +63,22 @@
                 <button type="submit" class="btn btn-xs btn-primary" >登出</button>
             </form>
 
-		  
-            <div style="margin:10px 0 20px 20px">
-                <span> 输入图书编码范围：</span> 
-                <div style="margin:20px 0 0 50px">
-                    <span>起始的SN CODE： &nbsp;</span>
-                    <input type="text" name="snCodeBeg" id ="snCodeBeg"/> </br></br>
-                    <span>结束的SN CODE： &nbsp;</span>
-                    <input type="text" name="snCodeEnd" id ="snCodeEnd"/> &nbsp;&nbsp;
-                    <input type="button" class="btn btn-xs btn-primary" name="searchBookList" id="serachBookList" value="查询" onclick="getBookInfoBySNRange()"/>
+		<div class="submit-frame" style="background-color:#EFEFEF; color:black; height:150px">
+            <div class="row-fluid">
+                 <div class="col-md-7" >
+                    <div style="margin:10px 0 20px 20px">
+                        <span> 输入图书编码范围：</span> 
+                        <div style="margin:20px 0 0 50px">
+                            <span>起始的SN CODE： &nbsp;</span>
+                            <input type="text" name="snCodeBeg" id ="snCodeBeg"/> </br></br>
+                            <span>结束的SN CODE： &nbsp;</span>
+                            <input type="text" name="snCodeEnd" id ="snCodeEnd"/> &nbsp;&nbsp;
+                            <input type="button" class="btn btn-xs btn-primary" name="searchBookList" id="serachBookList" value="查询" onclick="getBookInfoBySNRange()"/>
+                        </div>
+                    </div>
                 </div>
-
             </div>
+		</div>
           
             <div id="bookContents">
 

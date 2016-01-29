@@ -39,11 +39,11 @@
             
 <div class="" style="margin:30px 20px 20px 25px">
 
-	<div style="text-align:center; padding-left:92px; background:none repeat scroll 0% 0% #C9F0DD;height:60px">
+	<div style="text-align:center; padding-left:92px; background:none repeat scroll 0% 0% #C9F0C3;height:60px">
 		<h4 style="text-align:center; padding:20px 0 0 30px;">管理员控制页面</h4>
 	</div>
 	<div class="row clearfix" style="margin:20px 0 20px 0px">
-		<div class="col-md-2 column" style="background:rgba(198, 190, 204, 1)">
+		<div class="col-md-2 column" style="background:#C9F0C3">
 					<div class="sidebar-tab"><a href="readerList.aspx">读者管理</a></div>
 					<div class="sidebar-tab"><a href="bookList.aspx">图书管理</a></div>
                     <div class="sidebar-tab"><a href="circulationList.aspx">借阅记录</a></div>
@@ -62,13 +62,17 @@
                 <button type="submit" class="btn btn-xs btn-primary" >登出</button>
             </form>
 
-		  
-            <div style="margin:50px 0 20px 20px">
-                <span> 输入图书条形码查询：</span> 
-                <input type="text" name="bookSerialCode" id ="bookSerialCode"/>
-                <input type="button" class="btn btn-xs btn-primary" name="searchBook" id="serachBook" value="查询" onclick="getBookBySerial()"/>
+        <div class="submit-frame" style="background-color:#EFEFEF; color:black; height:120px">
+            <div class="row-fluid">
+                 <div class="col-md-7" >
+                    <div style="margin:50px 0 20px 20px">
+                        <span> 输入图书条形码查询：</span> 
+                        <input type="text" name="bookSerialCode" id ="bookSerialCode"/>
+                        <input type="button" class="btn btn-xs btn-primary" name="searchBook" id="serachBook" value="查询" onclick="getBookBySerial()"/>
+                    </div>
+                </div>
             </div>
-          
+        </div>
             <div id="bookContent">
 
             </div>
@@ -118,7 +122,7 @@
 			         	     <div style="margin: 15px 0 0 0">
 			         	        <span>RFID Code:</span>
                                 <input type="text" id="bookRFID" name="bookRFID"/><span style="color:red">(请使用RFID标签阅读器扫描)</span>
-                                 </br></br><span style="">友情提示： 请把RFID标签贴在书籍指定位置</span>
+                                 <br><br><span style="">友情提示： 请把RFID标签贴在书籍指定位置</span>
 			         	    </div>              
 			            </div>
                          <br>

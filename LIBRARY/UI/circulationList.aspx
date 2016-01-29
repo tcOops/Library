@@ -13,7 +13,6 @@
     <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
 </head>
 
-
 <body>
      <%
          List<LIBRARY.Models.circulation> circulationList =  getCirculationList();
@@ -23,11 +22,11 @@
             
     <div class="" style="margin:30px 20px 20px 25px">
 
-	<div style="text-align:center; padding-left:92px; background:none repeat scroll 0% 0% #C9F0DD;height:60px">
+	<div style="text-align:center; padding-left:92px; background:none repeat scroll 0% 0% #C9F0C3;height:60px">
 		<h4 style="text-align:center; padding:20px 0 0 30px;">管理员控制页面</h4>
 	</div>
 	<div class="row clearfix" style="margin:20px 0 20px 0px">
-		<div class="col-md-2 column" style="background:rgba(198, 190, 204, 1)">
+		<div class="col-md-2 column" style="background:#C9F0C3">
 					<div class="sidebar-tab"><a href="readerList.aspx">读者管理</a></div>
 					<div class="sidebar-tab"><a href="bookList.aspx">图书管理</a></div>
                     <div class="sidebar-tab-active"><a href="circulationList.aspx">借阅记录</a></div>
@@ -39,14 +38,14 @@
                     <div class="sidebar-tab"><a href="bookOnshelf.aspx">图书上架</a></div>     
                     <div class="sidebar-tab"><a href="demo.aspx">演示功能</a></div>
 		</div>
+
 		<div class="col-md-10 column">
             <form style="float:right" name="logout" action="logout.aspx" method='post'>
                 <%string username = (string)HttpContext.Current.Session["user"]; %>
                 用户：<%=username %>
                 <button type="submit" class="btn btn-xs btn-primary" >登出</button>
             </form>
-		<h3>借阅记录(<%=size %>)</h3>
-
+		    <h3>借阅记录(<%=size %>)</h3>
 		    <table style="border-width:0px;border-collapse:collapse;width:100%">
 				<tr style="background-color:#E0E0E0;height:40px;border-width:0px">
 					<td style="width:8%;border-width:0px;font-weight:bold;text-align:center">标号</td>

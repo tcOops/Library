@@ -28,7 +28,7 @@ namespace LIBRARY.UI
                     {
                         HttpContext.Current.Session["user"] = userName;
                         HttpContext.Current.Session["userId"] = userId;
-                        HttpContext.Current.Session.Timeout = 60;
+                        HttpContext.Current.Session.Timeout = 600;
                         Response.Redirect("home.aspx");
                     }
                     else
