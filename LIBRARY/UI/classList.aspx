@@ -33,7 +33,9 @@
                     <div class="sidebar-tab"><a href="locationList.aspx">馆藏地管理</a></div>
                     <div class="sidebar-tab-active"><a href="classList.aspx">班级管理</a></div>
                     <div class="sidebar-tab"><a href="gradeList.aspx">年级管理</a></div>
-                    <div class="sidebar-tab"><a href="dataImport.aspx">数据导入</a></div>  
+                    <div class="sidebar-tab"><a href="dataImport.aspx">数据导入</a></div> 
+                    <div class="sidebar-tab"><a href="bookSign.aspx">图书标识</a></div> 
+                    <div class="sidebar-tab"><a href="bookOnshelf.aspx">图书上架</a></div>    
                     <div class="sidebar-tab"><a href="demo.aspx">演示功能</a></div>
 		</div>
 	    <div class="col-md-10 column">

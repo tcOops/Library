@@ -85,6 +85,12 @@ namespace LIBRARY.Models
             set;
         }
 
+        public string Location_name
+        {
+            get;
+            set;
+        }
+
         public Boolean Is_deleted
         {
             get;

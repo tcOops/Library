@@ -95,7 +95,7 @@ class pushDB(object):
                 originalSta = 0
                 if data:
                     bookName = data[1]
-                if data and data[0] == 'out': #book in door
+                if data and data[0] == '不在馆': #book in door
                     originalSta = 1
 
                 if originalSta and statical[key] & 1:#signal_code == reader_id

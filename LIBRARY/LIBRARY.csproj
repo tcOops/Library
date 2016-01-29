@@ -43,6 +43,8 @@
     <Reference Include="MySql.Data">
       <HintPath>..\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -101,14 +103,18 @@
     <Content Include="static\js\jquery.1.7.min.js" />
     <Content Include="static\js\jQuery.js" />
     <Content Include="static\js\jquery.min.js" />
+    <Content Include="static\js\library.js" />
     <Content Include="static\js\order.js" />
     <Content Include="UI\addBook.aspx" />
+    <Content Include="UI\addBookSign.aspx" />
     <Content Include="UI\addClass.aspx" />
     <Content Include="UI\addGrade.aspx" />
     <Content Include="UI\addLocation.aspx" />
     <Content Include="UI\addReader.aspx" />
     <Content Include="UI\ajax.aspx" />
     <Content Include="UI\bookList.aspx" />
+    <Content Include="UI\bookOnShelf.aspx" />
+    <Content Include="UI\bookSign.aspx" />
     <Content Include="UI\circulationList.aspx" />
     <Content Include="UI\classList.aspx" />
     <Content Include="UI\dataImport.aspx" />
@@ -153,6 +159,13 @@
     <Compile Include="UI\addBook.aspx.designer.cs">
       <DependentUpon>addBook.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UI\addBookSign.aspx.cs">
+      <DependentUpon>addBookSign.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\addBookSign.aspx.designer.cs">
+      <DependentUpon>addBookSign.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI\addClass.aspx.cs">
       <DependentUpon>addClass.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -194,6 +207,20 @@
     </Compile>
     <Compile Include="UI\bookList.aspx.designer.cs">
       <DependentUpon>bookList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\bookOnShelf.aspx.cs">
+      <DependentUpon>bookOnShelf.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\bookOnShelf.aspx.designer.cs">
+      <DependentUpon>bookOnShelf.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\bookSign.aspx.cs">
+      <DependentUpon>bookSign.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\bookSign.aspx.designer.cs">
+      <DependentUpon>bookSign.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\circulationList.aspx.cs">
       <DependentUpon>circulationList.aspx</DependentUpon>

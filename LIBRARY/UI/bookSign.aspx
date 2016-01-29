@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="bookOnShelf.aspx.cs" Inherits="LIBRARY.UI.bookOnShelf" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="bookSign.aspx.cs" Inherits="LIBRARY.UI.bookSign" %>
 
 <!DOCTYPE html>
 
@@ -51,8 +51,8 @@
                     <div class="sidebar-tab"><a href="classList.aspx">班级管理</a></div>
                     <div class="sidebar-tab"><a href="gradeList.aspx">年级管理</a></div> 
                     <div class="sidebar-tab"><a href="dataImport.aspx">数据导入</a></div>      
-                    <div class="sidebar-tab"><a href="bookSign.aspx">图书标识</a></div> 
-                    <div class="sidebar-tab-active"><a href="bookOnshelf.aspx">图书上架</a></div>   
+                    <div class="sidebar-tab-active"><a href="bookSign.aspx">图书标识</a></div> 
+                    <div class="sidebar-tab"><a href="bookOnshelf.aspx">图书上架</a></div>   
                     <div class="sidebar-tab"><a href="demo.aspx">演示功能</a></div>
 		</div>
 		<div class="col-md-10 column">
@@ -63,27 +63,17 @@
             </form>
 
 		  
-            <div style="margin:10px 0 20px 20px">
-                <span> 输入图书编码范围：</span> 
-                <div style="margin:20px 0 0 50px">
-                    <span>起始的SN CODE： &nbsp;</span>
-                    <input type="text" name="snCodeBeg" id ="snCodeBeg"/> </br></br>
-                    <span>结束的SN CODE： &nbsp;</span>
-                    <input type="text" name="snCodeEnd" id ="snCodeEnd"/> &nbsp;&nbsp;
-                    <input type="button" class="btn btn-xs btn-primary" name="searchBookList" id="serachBookList" value="查询" onclick="getBookInfoBySNRange()"/>
-                </div>
-
+            <div style="margin:50px 0 20px 20px">
+                <span> 输入图书条形码查询：</span> 
+                <input type="text" name="bookSerialCode" id ="bookSerialCode"/>
+                <input type="button" class="btn btn-xs btn-primary" name="searchBook" id="serachBook" value="查询" onclick="getBookBySerial()"/>
             </div>
           
-            <div id="bookContents">
+            <div id="bookContent">
 
             </div>
 			
-            <div style="margin:20px 0 0 20px">
-				<!-- 按钮触发模态框 -->
-			</div>
-
-            <div class="modal fade" id="addBookLocation" tabindex="-1" role="dialog"
+            <div class="modal fade" id="bookSign" tabindex="-1" role="dialog"
 			  aria-labelledby="myModalLabel" aria-hidden="true" style="margin:30px 0 0 24%; width:60%">
 			   <div class="modal-dialog">
 			      <div class="modal-content">
@@ -93,33 +83,57 @@
 			                  &times;
 			            </button>
 			            <h4 class="modal-title" id="myModalLabel">
-			               图书上架
+			               标记图书
 			            </h4>
 			         </div>
-                     
-                     
-			        <div class="modal-body">
-                        <div style="margin:50px 0 50px 100px">
-                            <span>请选择上架地点：</span>
-                            <select id="location" name="location" style="width:200px">
 
-                            </select>
-                        </div>
-			        </div>  
+			         <form name="my_form" action="addBookSign.aspx" method='post' onsubmit="return check();">
+			             <div class="modal-body">
+                             <input style="display:none;" id="bookIdRes" name="bookIdRes"/>
+			         	     <div style="margin: 15px 0 0 0px" >
+			         	       <span>图书序列号：</span>
+                               <label id="bookSerialCodes"></label>
+			         	     </div>
 
-                    <input style="display:none;" id="reserveData" name="bookIds" />
+			         	     <div style="margin: 15px 0 0 0">
+                                <span>图书名称：</span>
+			         		    <label id="bookName"></label>
+			         	    </div>
 
-			        <div class="modal-footer">
-			        <button type="button" class="btn btn-default"
-			            data-dismiss="modal">取消
-			        </button>
-			        <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="updateLocation()">
-			          	确定添加
-			        </button>
-			        </div>
+                            <div style="margin: 15px 0 0 0">
+			         		    <span>作者：</span>
+			         		    <label id="bookAuthor"></label>
+			         	    </div>
 
+                            <div style="margin: 15px 0 0 0" >
+			         		    <span>出版社：</span>
+			         		    <label id="bookPublisher"></label>
+			         	    </div>
+
+                            <div style="margin: 15px 0 0 0">
+			         		    <span>SN Code: </span>&nbsp;&nbsp;
+                                <input type="text" id="bookSN" name="bookSN"/>
+			         	    </div>
+
+			         	     <div style="margin: 15px 0 0 0">
+			         	        <span>RFID Code:</span>
+                                <input type="text" id="bookRFID" name="bookRFID"/><span style="color:red">(请使用RFID标签阅读器扫描)</span>
+                                 </br></br><span style="">友情提示： 请把RFID标签贴在书籍指定位置</span>
+			         	    </div>              
+			            </div>
+                         <br>
+
+			             <div class="modal-footer">
+			                <button type="button" class="btn btn-default"
+			                   data-dismiss="modal">取消
+			                </button>
+			                <button type="submit" class="btn btn-primary">
+			          	        确定添加
+			                </button>
+			             </div>
+			        </form>
 			      </div>
-			    </div>
+			</div>
 		   </div>
 		</div>
 	</div>

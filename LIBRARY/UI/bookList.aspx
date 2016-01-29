@@ -32,6 +32,8 @@
                         <div class="sidebar-tab"><a href="classList.aspx">班级管理</a></div>
                         <div class="sidebar-tab"><a href="gradeList.aspx">年级管理</a></div>
                         <div class="sidebar-tab"><a href="dataImport.aspx">数据导入</a></div>  
+                        <div class="sidebar-tab"><a href="bookSign.aspx">图书标识</a></div> 
+                        <div class="sidebar-tab"><a href="bookOnshelf.aspx">图书上架</a></div>   
                         <div class="sidebar-tab"><a href="demo.aspx">演示功能</a></div>
 		    </div>
 		    <div class="col-md-10 column">
@@ -44,11 +46,12 @@
 
 			    <table style="border-width:0px;border-collapse:collapse;width:100%">
 				    <tr style="background-color:#E0E0E0;height:40px;border-width:0px">
-					    <td style="width:9%;border-width:0px;font-weight:bold;text-align:center">标号</td>
-					    <td style="width:19%; border-width:0px;font-weight:bold;text-align:center"> 标识码 </td>
-					    <td style="width:29%; border-width:0px;font-weight:bold;text-align:center"> 书名</td>
+					    <td style="width:7%;border-width:0px;font-weight:bold;text-align:center">标号</td>
+					    <td style="width:15%; border-width:0px;font-weight:bold;text-align:center"> 标识码 </td>
+					    <td style="width:24%; border-width:0px;font-weight:bold;text-align:center"> 书名</td>
 					    <td style="width:11%; border-width:0px;font-weight:bold;text-align:center">作者</td>
-                        <td style="width:11%;border-width:0px;font-weight:bold;text-align:center">价格</td>
+                        <td style="width:14%; border-width:0px;font-weight:bold;text-align:center">出版社</td>
+                        <td style="width:8%;border-width:0px;font-weight:bold;text-align:center">价格</td>
                         <td style="width:11%;border-width:0px;font-weight:bold;text-align:center">是否借出</td>
                         <td style="width:10%;border-width:0px;font-weight:bold;text-align:center">操作</td>
 				    </tr>
@@ -63,11 +66,12 @@
                     <% if (cnt % 2 == 0)
                         {%><tr class="row2" style=""> <%} %>
 				    <!--  <td style="width:3%;border-width:0px;font-weight:bold;text-align:center"><input type='checkbox' value="<%=book.Id%>" class="selectNode"/></td> -->
-				    <td style="width:9%;border-width:0px;text-align:center"><%=book.Id%></td>
-                    <td style="width:19%;border-width:0px;text-align:center"><%=book.Serial_code%></td>
-                    <td style="width:29%;border-width:0px;text-align:center"><%=book.Name%></td>
+				    <td style="width:7%;border-width:0px;text-align:center"><%=book.Id%></td>
+                    <td style="width:15%;border-width:0px;text-align:center"><%=book.Serial_code%></td>
+                    <td style="width:24%;border-width:0px;text-align:center"><%=book.Name%></td>
                     <td style="width:11%;border-width:0px;text-align:center"><%=book.Author%></td>
-                    <td style="width:11%;border-width:0px;text-align:center"><%=book.Price%>元</td>
+                    <td style="width:14%;border-width:0px;text-align:center"><%=book.Publisher_name%></td>
+                    <td style="width:8%;border-width:0px;text-align:center"><%=book.Price%>元</td>
                     <td style="width:11%;border-width:0px;text-align:center"><%=book.Status%></td>
                   
                     <td style="width:10%;border-width:0px;font-weight:bold;text-align:center">

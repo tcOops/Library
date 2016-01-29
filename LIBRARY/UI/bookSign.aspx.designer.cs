@@ -10,6 +10,6 @@
 namespace LIBRARY.UI {
     
     
-    public partial class bookOnShelf {
+    public partial class bookSign {
     }
 }

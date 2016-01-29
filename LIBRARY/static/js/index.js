@@ -4,7 +4,6 @@ function addData(){
 	var flag = false
 	for(var i = 0; i < checkboxs.length; ++i){
 		if(checkboxs[i].checked){
-			console.log(i)
 			if(flag) nodeIds += ','
 			else flag = true
 			nodeIds += checkboxs[i].value.toString()

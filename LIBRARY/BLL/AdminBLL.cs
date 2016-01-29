@@ -4,11 +4,16 @@ using System.Linq;
 using System.Web;
 using LIBRARY.DAL;
 using LIBRARY.Models;
+using System.Runtime.Serialization;
+using System.Text;
+using System.IO;
+using System.Runtime.Serialization.Json;
 
 namespace LIBRARY.BLL
 {
     public class AdminBLL
     {
+        public static bookDAL bookDAL = new bookDAL();
         public int adminLogin(string username, string password)
         {
             AdminDAL adminDAL = new AdminDAL();
@@ -48,16 +53,61 @@ namespace LIBRARY.BLL
 
         public List<book> getBooks()
         {
-            bookDAL bookDAL = new bookDAL();
             List<book> bookList;
             bookList = bookDAL.getBookList();
             return bookList;
         }
 
-         public bool addBook(Dictionary<string, string> kv)
+        public static string ObjectToJson(object obj)
         {
-            bookDAL bookDAL = new bookDAL();
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(obj.GetType());
+            MemoryStream stream = new MemoryStream();
+            serializer.WriteObject(stream, obj);
+            byte[] dataBytes = new byte[stream.Length];
+            stream.Position = 0;
+            stream.Read(dataBytes, 0, (int)stream.Length);
+            return Encoding.UTF8.GetString(dataBytes);
+        }
+
+        public static object JsonToObject(string jsonString, object obj)
+        {
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(obj.GetType());
+            MemoryStream mStream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));
+            return serializer.ReadObject(mStream);
+        }
+
+        public string getBookBySerial(string serialCode)
+        {
+            book book = bookDAL.getBookBySerial(serialCode);
+
+            //strcat Json dynamic
+            return ObjectToJson(book);
+        }
+
+        public string getBookBySNCodeRange(string snCodeBeg, string snCodeEnd)
+        {
+            List<book> bookList = bookDAL.getBookBySNCodeRange(snCodeBeg, snCodeEnd);
+
+            //strcat Json dynamic
+            string bookListJSON = ObjectToJson(bookList);
+            return bookListJSON;
+        }
+
+        public string getSNByOpId(int operId)
+        {
+            return bookDAL.getSNByOpId(operId);
+        }
+
+
+        public bool addBook(Dictionary<string, string> kv)
+        {
             return bookDAL.addBook(kv);
+        }
+
+
+        public bool updateBookInfoAboutRFID(string snCode, string signalCode, string bookId, string operId)
+        {
+            return bookDAL.updateBookInfoAboutRFID(snCode, signalCode, bookId, operId);
         }
 
 
@@ -158,11 +208,24 @@ namespace LIBRARY.BLL
             return locationList;
         }
 
+        public string getLocationByAjax()
+        {
+            LocationDAL locationDAL = new LocationDAL();
+            List<bookstoreLocation> locationList = new List<bookstoreLocation>();
+            locationList = locationDAL.getLocation();
+            return ObjectToJson(locationList);
+        }
 
         public bool addLocation(Dictionary<string, string> kv)
         {
             LocationDAL locationDAL = new LocationDAL();
             return locationDAL.addLocation(kv);
+        }
+
+        public bool updateBookLocation(string bookIds, string locationId, string locationName)
+        {
+            LocationDAL locationDAL = new LocationDAL();
+            return locationDAL.updateBookLocation(bookIds, locationId, locationName);
         }
     }
 }

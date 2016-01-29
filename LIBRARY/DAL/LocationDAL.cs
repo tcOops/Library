@@ -81,5 +81,41 @@ namespace LIBRARY.DAL
             }
             return false;
         }
+
+        public bool updateBookLocation(string bookIds, string locationId, string locationName)
+        {
+            
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectString))
+                {
+                    string[] bookIdList = bookIds.Split(',');
+                    foreach(string bookId in bookIdList)
+                    {
+                        if(bookId == "")
+                        {
+                            continue;
+                        }
+                        string sql = "update book set location_id = {0}, location_name = \"{2}\" where id = {1}";
+                        sql = String.Format(sql, locationId, bookId, locationName);
+                        MySqlCommand cmd = new MySqlCommand(sql, conn);
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }   
+                  
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("finally!");
+            }
+            return false;
+        }
     }
 }

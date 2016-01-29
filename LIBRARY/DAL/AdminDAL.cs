@@ -15,7 +15,7 @@ namespace LIBRARY.DAL
         {
             //string connectString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["mysqlConnectString"].ToString();
             MySqlConnection conn = new MySqlConnection(connectString);
-            string sql = "SELECT alias, password from admin";
+            string sql = "SELECT id, alias, password from admin";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             MySqlDataReader dr;
             admin admin = new admin();
@@ -25,6 +25,7 @@ namespace LIBRARY.DAL
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
+                    admin.id = Convert.ToInt32(dr["id"]);
                     admin.alias = dr["alias"].ToString();
                     admin.password = dr["password"].ToString();
                     conn.Close();
