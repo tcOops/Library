@@ -11,11 +11,11 @@ namespace LIBRARY.DAL
     public class AdminDAL
     {
         public static string connectString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["mysqlConnectString"].ToString();
-        public admin getAdminInfo()
+        public admin getAdminInfo(string name)
         {
             //string connectString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["mysqlConnectString"].ToString();
             MySqlConnection conn = new MySqlConnection(connectString);
-            string sql = "SELECT id, alias, password from admin";
+            string sql = "SELECT id, alias, password from admin where alias = \"" + name + "\"";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             MySqlDataReader dr;
             admin admin = new admin();

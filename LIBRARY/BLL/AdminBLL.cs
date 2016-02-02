@@ -17,7 +17,7 @@ namespace LIBRARY.BLL
         public int adminLogin(string username, string password)
         {
             AdminDAL adminDAL = new AdminDAL();
-            admin admin = adminDAL.getAdminInfo();
+            admin admin = adminDAL.getAdminInfo(username);
             if (admin == null)
             {
                 return -1;
