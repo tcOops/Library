@@ -8,30 +8,23 @@
  </head> 
 
 
- <body bgcolor="black">
-
-  <style type="text/css">
-        h1 {color:black}
-  </style> 
-
-  <div align="center" valign="middle">
-  <table> 
-   <tbody> 
-     <tr>
-     <td> 
-       <h1>ATM图书管理系统</h1> 
-     </td> 
-    </tr> 
-   </tbody> 
-  </table>   
-      <p>
-      </p>
-
-  <a href="readerList.aspx"> <img border="0" src="/static/img/reader.ico" width="200" height="200" /> </a> 
-
-  <a href="bookList.aspx"> <img border="0" src="/static/img/circulation.ico" width="200" height="200" /> </a> 
-  <p></p>
-  <a href="demo.aspx"> <img border="0" src="/static/img/demo.ico" width="200" height="200" /> </a> 
+ <body style="background-image:url(/static/img/cube.jpg)">
+  <div style="margin:1% 0 0 8%">
+      <img border="0" src="/static/img/LibraryLogo.png"/>
+  </div>
+  <div style="margin:-4% 0 0 28%">
+      <div style="margin:2% 0 3% 8%">
+          <h1>ATM图书管理系统</h1> 
+      </div>
+      <div>
+        <a href="readerList.aspx"> <img border="0" src="/static/img/reader.ico" width="200" height="200" /> </a> 
+        <a href="bookList.aspx"> <img border="0" src="/static/img/circulation.ico" width="200" height="200" /> </a> 
+      </div>
+ 
+      <br />
+      <div style="margin:1% 0 0 14%">
+        <a href="demo.aspx"> <img border="0" src="/static/img/demo.ico" width="200" height="200" /> </a> 
+      </div>   
   </div>  
  </body>
 

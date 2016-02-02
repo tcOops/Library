@@ -45,7 +45,11 @@ class Server(HD):
                 for each in dataSplit.split(";"):
                     if not each: break
                     ip_port, signal_code = each.split(',')
-                    ip = ipList[ip_port]
+                    #ip = ipList[ip_port]
+		    sql = "select rfid_ip from bookstorelocation where code = '{0}'".format(ip_port)
+		    pushDb.cursor.execute(sql)
+        	    data = pushDb.cursor.fetchone()
+		    ip = str(data[0])
                     now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
                     sql = "insert into rfidrecord(action_date, signal_code, ip, is_deleted, is_demo) values('{0}', '{1}', '{2}', {3}, {4})".format(now, signal_code, ip, 0, 0)
 

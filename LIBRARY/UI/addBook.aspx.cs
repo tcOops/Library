@@ -15,7 +15,7 @@ namespace LIBRARY.UI
             if (!IsPostBack)
             {
                 string ISBN = Request.Form["ISBN"];
-                string signal_code = Request.Form["signal_code"];
+                string serial_code = Request.Form["signal_code"];
                 string name = Request.Form["name"];
                 string author = Request.Form["author"];
                 string publisher_name = Request.Form["publisher_name"];
@@ -31,7 +31,7 @@ namespace LIBRARY.UI
                 AdminBLL adminBLL = new AdminBLL();
                 Dictionary<string, string> kv = new Dictionary<string, string>();
                 kv.Add("ISBN", ISBN);
-                kv.Add("signal_code", signal_code);
+                kv.Add("serial_code", serial_code);
                 kv.Add("name", name);
                 kv.Add("author", author);
                 kv.Add("publisher_name", publisher_name);

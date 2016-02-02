@@ -19,7 +19,7 @@ namespace LIBRARY.DAL
             {
                 using (MySqlConnection conn = new MySqlConnection(connectString))
                 {
-                    string sql = "select id, location, door_ip, RFID_ip, code, sn_code from bookstorelocation where is_deleted = 0";
+                    string sql = "select id, location, door_ip, RFID_ip, code, sn_code from bookstorelocation where is_deleted = 0 limit 20";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     conn.Open();
                     dr = cmd.ExecuteReader();

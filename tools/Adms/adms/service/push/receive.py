@@ -58,7 +58,12 @@ class pushDB(object):
             pass
 
     def handle(self, doorIp, dateOpen, dateClose,  readerCode, actionDate):
-        rfidIp = ipList[doorIp]
+        rfidIp = ''
+        sql = "select rfid_ip from bookstorelocation where door_ip = '{0}'".format(doorIp)
+        self.cursor.execute(sql)
+        data = self.cursor.fetchone()
+        if data:
+            rfidIp = str(data[0])
         sql = "select signal_code, action_date from rfidrecord where action_date >= '{0}' and action_date <= '{1}' and ip= '{2}'".format(dateOpen, dateClose, rfidIp)
         try:
             self.cursor.execute(sql)
