@@ -60,7 +60,7 @@ namespace LIBRARY.UI
                 {
                     role = "校长";
                 }
-                kv.Add("roleId", role);
+                kv.Add("role", role);
                 bool isSuccess = adminBLL.addReader(kv);
                 Response.Redirect("readerList.aspx");
             }

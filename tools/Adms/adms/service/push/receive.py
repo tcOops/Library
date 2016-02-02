@@ -58,10 +58,8 @@ class pushDB(object):
             pass
 
     def handle(self, doorIp, dateOpen, dateClose,  readerCode, actionDate):
-        print 'what;s sssseeeeeggggggggggggggggggggggg'
         rfidIp = ipList[doorIp]
         sql = "select signal_code, action_date from rfidrecord where action_date >= '{0}' and action_date <= '{1}' and ip= '{2}'".format(dateOpen, dateClose, rfidIp)
-        print sql, 'kkkkkkkkkkkkkkkkk'
         try:
             self.cursor.execute(sql)
             data = self.cursor.fetchall()
@@ -72,8 +70,7 @@ class pushDB(object):
                 t1 = time.mktime(time.strptime(actionDate,'%Y-%m-%d %H:%M:%S'))
                 if not actionDateRes: t2 = t1 + 3
                 else: t2 = time.mktime(time.strptime(actionDateRes,'%Y-%m-%d %H:%M:%S'))
-                print 'sssssssssbbbbbbb'
-                print t1, t2
+                print t1, t2, bookCode
                 diff = t2 - t1 if t1 < t2 else t1 - t2
                 if bookCode == bookCodeRes and diff <= 1:
                     pass
@@ -89,18 +86,18 @@ class pushDB(object):
             data = self.cursor.fetchone()
             readerName = data[0]
 
+            print '本次操作所有的借书情况： ', statical
             for key in statical:
                 sql1 = "select status, name from book where signal_code = '{0}'".format(key)
                 self.cursor.execute(sql1)
                 data = self.cursor.fetchone()
-                print "wowowowwowowowowow:", data[0], data[1]
                 originalSta = 0 #在馆
                 if data:
                     bookName = data[1]
                 if data and data[0] == '不在馆': #book in door
                     originalSta = 1
 
-                if originalSta and statical[key] & 1:#signal_code == reader_id
+                if data and originalSta and statical[key] & 1:#signal_code == reader_id
                     sql2 = """insert into circulation(book_id, signal_code, action_time, action_type, is_deleted, reader_name, book_name)
                      values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')""".format(key, readerCode, actionDate, '还书', 0, readerName, bookName)
                     print 'aaaaaa2222',sql2
@@ -111,14 +108,13 @@ class pushDB(object):
                     self.cursor.execute(sql3)
                     self.db.commit()
 
-                if (originalSta == 0) and statical[key] & 1:#signal_code == reader_id
+                if data and (originalSta == 0) and statical[key] & 1:#signal_code == reader_id
                     sql2 = """insert into circulation(book_id, signal_code, action_time, action_type, is_deleted,  reader_name, book_name)
                      values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')""".format(key, readerCode, actionDate, '借书', 0, readerName, bookName)
                     print 'aaaaaa4444',sql2
                     self.cursor.execute(sql2)
                     self.db.commit()
                     sql3 = "update book set status = '不在馆' where signal_code = '{0}'".format(key)
-                    print 'aaaaaa5555',sql3
                     self.cursor.execute(sql3)
                     self.db.commit()
 
@@ -133,8 +129,6 @@ class pushDB(object):
         self.cursor.execute(sql)
         data = self.cursor.fetchall()
         endtime = str(data[1][0])
-
-        sql = "select * from rfidrecord where "
         pass
 
 class ReceiveData(tornado.web.RequestHandler):
@@ -185,7 +179,6 @@ class ReceiveData(tornado.web.RequestHandler):
             pushDb = pushDB()
             sql = '''insert into doorrecord(action, action_date, signal_code,
              door_ip, generate_date, is_deleted, is_demo) values('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6})'''.format('open', actionTime, signalCode, ip, now, 0, 0)
-            #print sql
             pushDb.pushDoorInfo(sql)
         return ResponseCode.SUCCESS
 
@@ -193,11 +186,11 @@ class ReceiveData(tornado.web.RequestHandler):
         print "-------dev=", self.device.ip, ":rtState=", self.data
 
         pieces = self.data.split()
-        sta = pieces[3].split('=')[1]
+        sta = pieces[2].split('=')[1] #根据sensor的数值来判断状态， 01表示关门， 02表示开门
         ip = self.device.ip
 
         pushDb = pushDB()
-        if sta == '00': #关门
+        if sta == '01': #关门， 首先判断当前数据库里面是不是开着门的状态？ 如果不是， 说明是垃圾数据
             sql = "select action_date, action, signal_code, generate_date from doorrecord where door_ip = '{0}' order by id desc limit 1".format(ip)
             data = pushDb.getTime(sql)
             if data and data[1] == 'open':
@@ -211,14 +204,16 @@ class ReceiveData(tornado.web.RequestHandler):
                 t1 = time.mktime(time.strptime(nowTime,'%Y-%m-%d %H:%M:%S'))
                 t2 = time.mktime(time.strptime(openTime,'%Y-%m-%d %H:%M:%S'))
 
-                diff = t1 - t2 if t2 < t1 else t2 - t1
+               # diff = t1 - t2 if t2 < t1 else t2 - t1
                # print 'dddddddddddddd', t1, t2, diff
-                if diff > 8 or diff < 3: # not the delay time, but the action for closing
-                    now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
-                    sql = '''insert into doorrecord(action, action_date, signal_code,
-             door_ip, generate_date, is_deleted, is_demo) values('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6})'''.format('close', nowTime, signalCode, ip, now, 0, 0)
-                    pushDb.pushDoorInfo(sql)
-                    pushDb.handle(ip, systemNowTime, now, signalCode, now)
+               # if diff > 8 or diff < 3: # not the delay time, but the action for closing
+                now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time())) #当前时间， 在处理的时候以服务器上的时间为准
+                sql = '''insert into doorrecord(action, action_date, signal_code,
+         door_ip, generate_date, is_deleted, is_demo) values('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6})'''.format('close', nowTime, signalCode, ip, now, 0, 0)
+                pushDb.pushDoorInfo(sql)
+                pushDb.handle(ip, systemNowTime, now, signalCode, now)
+        elif sta == '02': #开门
+            pass
         return ResponseCode.SUCCESS
 
     def devParams(self):

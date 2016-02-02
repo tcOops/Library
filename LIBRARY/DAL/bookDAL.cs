@@ -120,7 +120,7 @@ namespace LIBRARY.DAL
             {
                 using (MySqlConnection conn = new MySqlConnection(connectString))
                 {
-                    string sql = "SELECT id, sn_code from book where oper_id = {0} and sn_code is not null order by id desc limit 1;";
+                    string sql = "SELECT id, sn_code from book where oper_id = {0} and sn_code is not null order by sn_code desc limit 1;";
                     sql = string.Format(sql, Convert.ToString(operId));
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     conn.Open();

@@ -52,7 +52,7 @@ class Server(HD):
                     diff, nt = 10, time.time()
                     if opTime != -1:
                         diff = nt - opTime if opTime < nt else opTime - nt
-                    if bookSignalCode == signal_code and diff <= 2.0:
+                    if bookSignalCode == signal_code and diff <= 1.0:
                         pass
                     else: pushDb.push(sql)
 
