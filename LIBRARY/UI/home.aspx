@@ -1,4 +1,5 @@
 ﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
  <head>
     <title> home </title>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
@@ -8,12 +9,12 @@
  </head> 
 
 
- <body style="background-image:url(/static/img/cube.jpg)">
-  <div style="margin:1% 0 0 8%">
+ <body style="background-image:url(/static/img/152309805.jpg);background-repeat:round;">
+  <div style="margin:4% 0 0 12%">
       <img border="0" src="/static/img/LibraryLogo.png"/>
   </div>
-  <div style="margin:-4% 0 0 28%">
-      <div style="margin:2% 0 3% 8%">
+  <div style="margin:-5% 0 0 30%">
+      <div style="margin:2% 0 3% 7%">
           <h1>ATM图书管理系统</h1> 
       </div>
       <div>
@@ -27,7 +28,5 @@
       </div>   
   </div>  
  </body>
-
-
 
 </html>

@@ -58,12 +58,13 @@ class pushDB(object):
             pass
 
     def handle(self, doorIp, dateOpen, dateClose,  readerCode, actionDate):
-        rfidIp = ''
-        sql = "select rfid_ip from bookstorelocation where door_ip = '{0}'".format(doorIp)
+        rfidIp, locationId = '', 0
+        sql = "select rfid_ip, id from bookstorelocation where door_ip = '{0}'".format(doorIp)
         self.cursor.execute(sql)
         data = self.cursor.fetchone()
         if data:
             rfidIp = str(data[0])
+            locationId = int(data[1])
         sql = "select signal_code, action_date from rfidrecord where action_date >= '{0}' and action_date <= '{1}' and ip= '{2}'".format(dateOpen, dateClose, rfidIp)
         try:
             self.cursor.execute(sql)
@@ -108,7 +109,7 @@ class pushDB(object):
                     print 'aaaaaa2222',sql2
                     self.cursor.execute(sql2)
                     self.db.commit()
-                    sql3 = "update book set status = '在馆' where signal_code = '{0}'".format(key)
+                    sql3 = "update book set status = '在馆', location_id = {1} where signal_code = '{0}'".format(key, locationId) #可以实现多地还书， 只要设置book的locaitonId即可
                     print 'aaaaaa3333',sql3
                     self.cursor.execute(sql3)
                     self.db.commit()
