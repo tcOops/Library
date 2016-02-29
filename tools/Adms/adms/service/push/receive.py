@@ -105,8 +105,8 @@ class pushDB(object):
                     originalSta = 1
 
                 if data and originalSta and statical[key] & 1:#signal_code == reader_id
-                    sql2 = """insert into circulation(book_id, signal_code, action_time, action_type, is_deleted, reader_name, book_name, loction_name, location_id)
-                     values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')""".format(key, readerCode, actionDate, '还书', 0, readerName, bookName, locationName, locationId)
+                    sql2 = """insert into circulation(book_id, signal_code, action_time, action_type, is_deleted, reader_name, book_name, location_name, location_id)
+                     values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', {8})""".format(key, readerCode, actionDate, '还书', 0, readerName, bookName, locationName, locationId)
                     self.cursor.execute(sql2)
                     self.db.commit()
                     sql3 = "update book set status = '在馆', location_id = {1} where signal_code = '{0}'".format(key, locationId) #可以实现多地还书， 只要设置book的locaitonId即可
@@ -115,8 +115,8 @@ class pushDB(object):
                     self.db.commit()
 
                 if data and (originalSta == 0) and statical[key] & 1:#signal_code == reader_id
-                    sql2 = """insert into circulation(book_id, signal_code, action_time, action_type, is_deleted,  reader_name, book_name, loction_name, location_id)
-                     values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')""".format(key, readerCode, actionDate, '借书', 0, readerName, bookName, locationName, locationId)
+                    sql2 = """insert into circulation(book_id, signal_code, action_time, action_type, is_deleted,  reader_name, book_name, location_name, location_id)
+                     values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', {8})""".format(key, readerCode, actionDate, '借书', 0, readerName, bookName, locationName, locationId)
                     self.cursor.execute(sql2)
                     self.db.commit()
                     sql3 = "update book set status = '不在馆' where signal_code = '{0}'".format(key)
@@ -182,9 +182,14 @@ class ReceiveData(tornado.web.RequestHandler):
 
         if int(signalCode) != 0:
             pushDb = pushDB()
-            sql = '''insert into doorrecord(action, action_date, signal_code,
-             door_ip, generate_date, is_deleted, is_demo) values('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6})'''.format('open', actionTime, signalCode, ip, now, 0, 0)
-            pushDb.pushDoorInfo(sql)
+            sql = 'select action from doorrecord where door_ip = "{0}" order by id desc limit 1'.format(ip)
+            print sql, 'why??????????????????'
+            pushDb.cursor.execute(sql)
+            data = pushDb.cursor.fetchone()
+            if str(data[0]) == 'close': #只有当前门是关闭状态， 刷门卡才有用， 否则刷多次没有意义
+                sql = '''insert into doorrecord(action, action_date, signal_code,
+                 door_ip, generate_date, is_deleted, is_demo) values('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6})'''.format('open', actionTime, signalCode, ip, now, 0, 0)
+                pushDb.pushDoorInfo(sql)
         return ResponseCode.SUCCESS
 
     def rtState(self):

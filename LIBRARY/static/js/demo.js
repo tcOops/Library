@@ -32,7 +32,7 @@ function showRTMsg(response) {
             content += "读者： " + response[i].reader_name + "</br>"
         }
         if ('location_door' in response[i]) {
-            content += "馆藏地： " + response[i].location_door + "<br>"
+            content += "书柜位置： " + response[i].location_door + "<br>"
         }
         if ('action' in response[i]) {
             if(response[i].action == 'open'){
@@ -58,7 +58,7 @@ function showRTMsg(response) {
             content += "书籍名称： " + response[i].book_name + "</br>"
         }
         if ('location_rfid' in response[i]) {
-            content += "馆藏地： " + response[i].location_rfid + "<br>"
+            content += "书柜位置： " + response[i].location_rfid + "<br>"
         }
         if ('action_date' in response[i]) {
             content += "操作时间： " + response[i].action_date + "</br></br>"
@@ -83,6 +83,6 @@ function testRTF(response)
 }
 
 $(function (){
-    setInterval(refreshOnTime, 1400);
+    setInterval(refreshOnTime, 800);
     //refreshOnTime();
 })

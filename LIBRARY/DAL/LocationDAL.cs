@@ -128,7 +128,7 @@ namespace LIBRARY.DAL
             {
                 using (MySqlConnection conn = new MySqlConnection(connectString))
                 {
-                    string sql = "select id, location from bookstorelocation where is_deleted = 0 and door_ip = {0}";
+                    string sql = "select id, location from bookstorelocation where is_deleted = 0 and door_ip = \"{0}\"";
                     sql = string.Format(sql, doorIp);
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     conn.Open();
@@ -161,7 +161,7 @@ namespace LIBRARY.DAL
             {
                 using (MySqlConnection conn = new MySqlConnection(connectString))
                 {
-                    string sql = "select id, location from bookstorelocation where is_deleted = 0 and rfid_ip = {0}";
+                    string sql = "select id, location from bookstorelocation where is_deleted = 0 and rfid_ip = \"{0}\"";
                     sql = string.Format(sql, RFIDIp);
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     conn.Open();

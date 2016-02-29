@@ -35,6 +35,7 @@ namespace LIBRARY.DAL
                     circulation.Action_time = Convert.ToString(dr["action_time"]);
                     circulation.Action_type = Convert.ToString(dr["action_type"]);
                     circulation.Book_name = Convert.ToString(dr["book_name"]);
+                    circulation.Location_name = Convert.ToString(dr["location_name"]);
 
                     circulationList.Add(circulation);
                 }
