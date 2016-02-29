@@ -1,0 +1,6 @@
+C:\Users\Administrator\Desktop\pluto\LIBRARY\bin\LIBRARY.dll.config
+C:\Users\Administrator\Desktop\pluto\LIBRARY\bin\LIBRARY.dll
+C:\Users\Administrator\Desktop\pluto\LIBRARY\bin\LIBRARY.pdb
+C:\Users\Administrator\Desktop\pluto\LIBRARY\obj\Release\LIBRARY.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\pluto\LIBRARY\obj\Release\LIBRARY.dll
+C:\Users\Administrator\Desktop\pluto\LIBRARY\obj\Release\LIBRARY.pdb

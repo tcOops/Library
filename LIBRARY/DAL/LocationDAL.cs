@@ -119,5 +119,69 @@ namespace LIBRARY.DAL
             }
             return false;
         }
+
+        public string getLocationByDoorIp(string doorIp)
+        {
+            MySqlDataReader dr;
+            string locationName = "";
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectString))
+                {
+                    string sql = "select id, location from bookstorelocation where is_deleted = 0 and door_ip = {0}";
+                    sql = string.Format(sql, doorIp);
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    conn.Open();
+                    dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        locationName = Convert.ToString(dr["location"]);
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("finally!");
+            }
+            return locationName;
+        }
+
+
+        public string getLocationByRFIDIp(string RFIDIp)
+        {
+            MySqlDataReader dr;
+            string locationName = "";
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(connectString))
+                {
+                    string sql = "select id, location from bookstorelocation where is_deleted = 0 and rfid_ip = {0}";
+                    sql = string.Format(sql, RFIDIp);
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    conn.Open();
+                    dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+                    {             
+                        locationName = Convert.ToString(dr["location"]);                       
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("finally!");
+            }
+            return locationName;
+        }
     }
 }

@@ -61,7 +61,7 @@ namespace LIBRARY.Models
             set;
         }
 
-        public double Price
+        public string Price
         {
             get;
             set;

@@ -1,0 +1,279 @@
+ul
+{
+list-style-type:none;
+margin:0;
+padding:0;
+overflow:hidden;
+}
+li
+{
+
+}
+a:link,a:visited
+{
+display:block;
+width:120px;
+font-weight:bold;
+color:#FFFFFF;
+background-color:#bebebe;
+text-align:center;
+padding:4px;
+text-decoration:none;
+text-transform:uppercase;
+}
+a:hover,a:active
+{
+background-color:#cc0000;
+}
+
+
+
+
+
+body {
+  color: #080707;
+  font-family:  Courier New;
+
+/*scrollbar: yes;*/
+}
+
+div.main {
+  width: 800px;
+  text-align: left;
+  padding-top: 20px;
+}
+
+div.vRand {
+  border-left: solid 7px #60CC60;
+  border-right: solid 7px #60CC60;
+  border-top: solid 1px #78FF78;
+  border-bottom: solid 1px #78FF78;
+  background-color: #6A7F6A;
+  margin: 0px;
+  padding: 0px;
+  height: 7px;
+}
+
+div.trdr {
+    color: #444444;
+    background: #B9FFB9;
+  font-weight: bold;
+  font-size: 2.5em;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 16px;
+}
+
+div.trdrsub {
+    color: #444444;
+    background: #B9FFB9;
+  font-weight: bold;
+  font-size: 1.4em;
+    padding-bottom: 10px;
+/*  padding-top: 10px; */
+    padding-left: 20px;
+}
+
+div.descr {
+  font-weight: bold;
+  font-size: 11px;
+    margin-bottom: 2px;
+}
+
+font.verb {
+  font-family: Courier New;
+  font-weight: bold;
+  font-size: 0.9em;
+  color: #fff;
+}
+
+pre {
+  border: solid 2px #555;
+  background-color: #DDD;
+  margin: 0px;
+  padding: 5px;
+  font-family: Courier New;
+  font-size: 0.8em;
+  color: #000;
+  width: 600px;
+}
+
+a  {
+  color: #FFFFFF;
+}
+
+a.footer {
+  text-decoration: none;
+}
+
+a.header {
+  text-decoration: none;
+}
+
+a:hover  {
+    color: #D4E7FA;
+    text-decoration: none;
+}
+
+div.content {
+  background: #3C7F3D;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 12px;
+}
+
+div.field-row {
+    height: 30px;
+    width: 750px;
+    text-align: center;
+    line-height: 30px;
+    margin: 10px;
+
+    border-style: solid;
+    border-width: 0px;
+    border-color: black;
+    
+} 
+div.field-name {
+    width: 150px;
+    text-align: left;
+    margin-right: 5px;
+    float: left;
+
+    border-style: solid;
+    border-color: red;
+    border-width: 0px;
+}
+.input {
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    height: 30px; 
+    width: 240px;
+
+    border-width: 0px;
+    border-radius:5px;
+
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
+
+
+
+div.another{
+
+    text-align: left;
+    float: left;
+    margin-left: 10px;
+
+    border-style: solid;
+    border-color: yellow;
+    border-width: 0px;
+}
+
+
+#recaptcha_image img {
+    width:  250px;
+    height:  50px;
+    float: left;
+    border-radius:5px;
+}
+
+#recaptcha_image {
+    display: inline;
+}
+
+
+h1 {
+  font: normal 1.8em Courier New;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+h2 {
+  font: normal 1.5em Courier New;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 5px;
+}
+
+div.header {
+  padding-top: 0px;
+  padding-left: 0px;
+  background: #444;
+  font: bold 1.2em Courier New;
+  color: #EEE;
+  padding-top: 10px;
+  padding-bottom: 3px;
+  height: 30px;
+}
+
+div.menuheader {
+  font: normal 1.3em Courier New;
+  color: #EEE;
+  margin-bottom: 10px;
+}
+
+li {
+  padding-bottom: 10px;
+}
+
+td.banner {
+  width: 180px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+td.footer {
+  text-align: center;
+  padding-left: 25px;
+  padding-right: 25px;
+  font-family: Courier New;
+  font-size: 11px;
+}
+
+
+td.headermenu {
+  width: 120px;
+}
+
+div.subheader {
+  font: normal 1.3em Courier New;
+  color: #EEE;
+  text-decoration:underline;
+  margin-bottom: 10px;
+}
+
+
+
+/* TABLE */
+.tab td {
+  border: 1px solid #404040;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  font-size: 12px;
+}
+
+.tab th {
+  font-size: 14px;
+  text-align: left;
+  padding-left: 4px;
+  border: 1px solid #404040;
+}
+
+.tab tr {
+  margin: 1px;
+  padding: 1px;
+  spacing: 1px;
+  font-family: Courier New;
+}
+
+.tab {
+  border-collapse: collapse;
+  border-spacing: 1;
+  border: 1px solid #404040;
+  width: 100%;
+}

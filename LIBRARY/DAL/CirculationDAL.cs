@@ -15,7 +15,7 @@ namespace LIBRARY.DAL
         {
             //string connectString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["mysqlConnectString"].ToString();
             MySqlConnection conn = new MySqlConnection(connectString);
-            string sql = "SELECT id, reader_name, book_id, signal_code, action_time, action_type, book_name from circulation where is_deleted = 0 order by id desc";
+            string sql = "SELECT id, reader_name, book_id, signal_code, action_time, action_type, book_name, location_name from circulation where is_deleted = 0 order by id desc";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             MySqlDataReader dr;
             List<circulation> circulationList = new List<circulation>();
@@ -38,7 +38,6 @@ namespace LIBRARY.DAL
 
                     circulationList.Add(circulation);
                 }
-                conn.Close();
             }
             catch (Exception ex)
             {
@@ -46,6 +45,7 @@ namespace LIBRARY.DAL
             }
             finally
             {
+                conn.Close();
                 Console.WriteLine("finally!");
             }
             return circulationList;

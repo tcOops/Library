@@ -120,6 +120,7 @@ namespace LIBRARY.BLL
 
             bookDAL bookDAL = new bookDAL();
             ReaderDAL readerDAL = new ReaderDAL();
+            LocationDAL locationDAL = new LocationDAL();
             string demoInfoInJson = "[";
             bool flag = true;
 
@@ -130,11 +131,12 @@ namespace LIBRARY.BLL
                 {
                     demoInfoInJson += ",";
                 }
-
+                string locationName = locationDAL.getLocationByDoorIp(doorRecord.Door_ip);
                 string readerName = readerDAL.getReaderNameBySC(doorRecord.Signal_code);
                 string each = "{\"action\":\"" + doorRecord.Action + "\",";
                 each += "\"reader_name\":\"" + readerName + "\",";
                 each += "\"generate_date\":\"" + doorRecord.Generate_date + "\",";
+                each += "\"location_door\":\"" + locationName + "\",";
                 each += "\"door_ip\":\"" + doorRecord.Door_ip + "\"}";
                 demoInfoInJson += each;
                 flag = false;
@@ -148,10 +150,12 @@ namespace LIBRARY.BLL
                 {
                     demoInfoInJson += ",";
                 }
+                string locationName = locationDAL.getLocationByRFIDIp(RFIDRecord.Ip);
                 string bookName = bookDAL.getbookNameBySC(RFIDRecord.Signal_code);
                 string each = "{\"signal_code\":\"" + RFIDRecord.Signal_code + "\",";
                 each += "\"book_name\":\"" + bookName + "\",";
                 each += "\"action_date\":\"" + RFIDRecord.Action_date + "\",";
+                each += "\"location_rfid\":\"" + locationName + "\",";
                 each += "\"ip\":\"" + RFIDRecord.Ip + "\"}";
                 demoInfoInJson += each;
                 flag = false;

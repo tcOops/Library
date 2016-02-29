@@ -8,12 +8,12 @@ import time, os
 import MySQLdb
 log_file_path = os.getcwd()
 
-host = '192.168.1.111'
+host = '192.168.2.41'
 port = 1001
 
-ipList = {
-    '11' : '192.168.1.190'
-}
+#ipList = {
+#    '11' : '192.168.1.190'
+#}
 
 class Server(HD):
     def handle(self):

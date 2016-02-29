@@ -15,7 +15,7 @@ namespace LIBRARY.DAL
         {
             //string connectString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["mysqlConnectString"].ToString();
             MySqlConnection conn = new MySqlConnection(connectString);
-            string sql = "SELECT id, name, sex, class_id, student_code, student_card_number, role, reader_status, generate_date from reader where is_deleted = 0 limit 20";
+            string sql = "SELECT id, name, sex, class_id, student_code, student_card_number, role, reader_status, generate_date from reader where 1 = 1 ";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             MySqlDataReader dr;
             List<reader> readerList = new List<reader>();
@@ -39,7 +39,6 @@ namespace LIBRARY.DAL
 
                     readerList.Add(reader);
                 }
-                conn.Close();
             }
             catch (Exception ex)
             {
@@ -47,6 +46,7 @@ namespace LIBRARY.DAL
             }
             finally
             {
+                conn.Close();
                 Console.WriteLine("finally!");
             }
             return readerList;
@@ -107,7 +107,6 @@ namespace LIBRARY.DAL
                 reader.Role = Convert.ToString(dr["role"]);
                 reader.Reader_status = Convert.ToString(dr["reader_status"]);
                 reader.Generate_date = Convert.ToDateTime(dr["generate_date"]);
-                conn.Close();
             }
             catch (Exception ex)
             {
@@ -115,6 +114,7 @@ namespace LIBRARY.DAL
             }
             finally
             {
+                conn.Close();
                 Console.WriteLine("finally!");
             }
             return reader;

@@ -91,6 +91,7 @@
     <Content Include="static\img\circulation.ico" />
     <Content Include="static\img\cube.jpg" />
     <Content Include="static\img\demo.ico" />
+    <Content Include="static\img\favicon.ico" />
     <Content Include="static\img\figure.jpg" />
     <Content Include="static\img\footerbg.png" />
     <Content Include="static\img\headerbg.png" />
@@ -164,6 +165,11 @@
     <Compile Include="Models\RFIDRecord.cs" />
     <Compile Include="Models\school.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="UI\addBook.aspx.cs">
       <DependentUpon>addBook.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -320,6 +326,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\abs.pubxml" />
+    <None Include="Properties\PublishProfiles\pluto.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

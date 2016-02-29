@@ -28,7 +28,6 @@ namespace LIBRARY.DAL
                     admin.id = Convert.ToInt32(dr["id"]);
                     admin.alias = dr["alias"].ToString();
                     admin.password = dr["password"].ToString();
-                    conn.Close();
                     break;
                 }
             }
@@ -38,6 +37,7 @@ namespace LIBRARY.DAL
             }
             finally
             {
+                conn.Close();
                 Console.WriteLine("finally!");
             }
             return admin;

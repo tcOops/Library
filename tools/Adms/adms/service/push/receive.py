@@ -58,13 +58,14 @@ class pushDB(object):
             pass
 
     def handle(self, doorIp, dateOpen, dateClose,  readerCode, actionDate):
-        rfidIp, locationId = '', 0
-        sql = "select rfid_ip, id from bookstorelocation where door_ip = '{0}'".format(doorIp)
+        rfidIp, locationId, locationName = '', 0, ''
+        sql = "select rfid_ip, id, location from bookstorelocation where door_ip = '{0}'".format(doorIp)
         self.cursor.execute(sql)
         data = self.cursor.fetchone()
         if data:
             rfidIp = str(data[0])
             locationId = int(data[1])
+            locationName = str(data[2])
         sql = "select signal_code, action_date from rfidrecord where action_date >= '{0}' and action_date <= '{1}' and ip= '{2}'".format(dateOpen, dateClose, rfidIp)
         try:
             self.cursor.execute(sql)
@@ -76,7 +77,7 @@ class pushDB(object):
                 t1 = time.mktime(time.strptime(actionDate,'%Y-%m-%d %H:%M:%S'))
                 if not actionDateRes: t2 = t1 + 3
                 else: t2 = time.mktime(time.strptime(actionDateRes,'%Y-%m-%d %H:%M:%S'))
-                print t1, t2, bookCode
+
                 diff = t2 - t1 if t1 < t2 else t1 - t2
                 if bookCode == bookCodeRes and diff <= 1:
                     pass
@@ -104,20 +105,18 @@ class pushDB(object):
                     originalSta = 1
 
                 if data and originalSta and statical[key] & 1:#signal_code == reader_id
-                    sql2 = """insert into circulation(book_id, signal_code, action_time, action_type, is_deleted, reader_name, book_name)
-                     values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')""".format(key, readerCode, actionDate, '还书', 0, readerName, bookName)
-                    print 'aaaaaa2222',sql2
+                    sql2 = """insert into circulation(book_id, signal_code, action_time, action_type, is_deleted, reader_name, book_name, loction_name, location_id)
+                     values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')""".format(key, readerCode, actionDate, '还书', 0, readerName, bookName, locationName, locationId)
                     self.cursor.execute(sql2)
                     self.db.commit()
                     sql3 = "update book set status = '在馆', location_id = {1} where signal_code = '{0}'".format(key, locationId) #可以实现多地还书， 只要设置book的locaitonId即可
-                    print 'aaaaaa3333',sql3
+
                     self.cursor.execute(sql3)
                     self.db.commit()
 
                 if data and (originalSta == 0) and statical[key] & 1:#signal_code == reader_id
-                    sql2 = """insert into circulation(book_id, signal_code, action_time, action_type, is_deleted,  reader_name, book_name)
-                     values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')""".format(key, readerCode, actionDate, '借书', 0, readerName, bookName)
-                    print 'aaaaaa4444',sql2
+                    sql2 = """insert into circulation(book_id, signal_code, action_time, action_type, is_deleted,  reader_name, book_name, loction_name, location_id)
+                     values('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}')""".format(key, readerCode, actionDate, '借书', 0, readerName, bookName, locationName, locationId)
                     self.cursor.execute(sql2)
                     self.db.commit()
                     sql3 = "update book set status = '不在馆' where signal_code = '{0}'".format(key)
@@ -206,12 +205,12 @@ class ReceiveData(tornado.web.RequestHandler):
                 nowTime = pieces[0].split('=')[1]
                 signalCode = data[2]
                 systemNowTime = data[3]
-               # print nowTime, openTime
+
                 t1 = time.mktime(time.strptime(nowTime,'%Y-%m-%d %H:%M:%S'))
                 t2 = time.mktime(time.strptime(openTime,'%Y-%m-%d %H:%M:%S'))
 
                # diff = t1 - t2 if t2 < t1 else t2 - t1
-               # print 'dddddddddddddd', t1, t2, diff
+
                # if diff > 8 or diff < 3: # not the delay time, but the action for closing
                 now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time())) #当前时间， 在处理的时候以服务器上的时间为准
                 sql = '''insert into doorrecord(action, action_date, signal_code,

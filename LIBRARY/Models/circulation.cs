@@ -55,5 +55,17 @@ namespace LIBRARY.Models
             get;
             set;
         }
+
+        public int Location_id
+        {
+            get;
+            set;
+        }
+
+        public string Location_name
+        {
+            get;
+            set;
+        }
     }
 }

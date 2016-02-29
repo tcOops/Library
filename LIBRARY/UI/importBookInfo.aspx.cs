@@ -50,25 +50,47 @@ namespace LIBRARY.UI
                         string publishDate = Convert.ToString(dr[4]);
                         string indexId = Convert.ToString(dr[5]);
                         string pageNumber = Convert.ToString(dr[7]);
-                        double price = Convert.ToDouble(dr[8]);
+                        string price = "0.0";
                         string ISBN = Convert.ToString(dr[9]);
-
-                        AdminBLL adminBLL = new AdminBLL();
-                        Dictionary<string, string> kv = new Dictionary<string, string>();
-                        kv.Add("ISBN", ISBN);
-                        kv.Add("serial_code", serialCode);
-                        kv.Add("name", bookName);
-                        kv.Add("author", author);
-                        kv.Add("publisher_name", publisher);
-                        kv.Add("publisher_id", "0");
-                        kv.Add("publish_date", publishDate);
-                        kv.Add("price", Convert.ToString(price));
-                        kv.Add("language", "");
-                        kv.Add("status", "在馆");
-                        kv.Add("location_id", "0");
-                        kv.Add("index_id", indexId);
-                        kv.Add("page_number", pageNumber);
-                        bool isSuccess = adminBLL.addBook(kv);
+                        
+                        if(Convert.ToString(dr[8]) != "")
+                        {
+                            price = Convert.ToString(dr[8]);
+                        }
+                       
+                        string signalCode = Convert.ToString(dr[11]);
+                        
+                        if(signalCode != "")
+                        {
+                            int size = signalCode.Length;
+                            string tmp = "";
+                            for (int j = size - 2; j >= 0; j -= 2)
+                            {
+                                tmp = tmp + signalCode[j] + signalCode[j + 1];
+                            }
+                            signalCode = tmp;
+                        }
+                       
+                        if (signalCode != "")
+                        {
+                            AdminBLL adminBLL = new AdminBLL();
+                            Dictionary<string, string> kv = new Dictionary<string, string>();
+                            kv.Add("ISBN", ISBN);
+                            kv.Add("serial_code", serialCode);
+                            kv.Add("name", bookName);
+                            kv.Add("author", author);
+                            kv.Add("publisher_name", publisher);
+                            kv.Add("publisher_id", "0");
+                            kv.Add("publish_date", publishDate);
+                            kv.Add("price", Convert.ToString(price));
+                            kv.Add("language", "");
+                            kv.Add("status", "在馆");
+                            kv.Add("location_id", "0");
+                            kv.Add("index_id", indexId);
+                            kv.Add("page_number", pageNumber);
+                            kv.Add("signal_code", signalCode);
+                            bool isSuccess = adminBLL.addBook(kv);
+                        }                    
                     }
                     Response.Redirect("dataImport.aspx");
                 }

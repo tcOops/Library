@@ -26,7 +26,7 @@ namespace LIBRARY.UI
                         //postedFile.FileName： 客户端文件地址
                         //postedFile.ContentType.ToString()： 上传的文件类型
                         string str = Server.MapPath("\\Avatar\\") + new_filename;                                                                              //保存文件到文件夹，地址是当前页面的同一级目录下的files文件夹中
-                        postedFile.SaveAs(str);
+                    //    postedFile.SaveAs(str);
                         Response.Write("success");
                     }
                     else

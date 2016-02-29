@@ -43,7 +43,6 @@ namespace LIBRARY.DAL
                     RFIDRecordList.Add(RFIDRecord);             
                 }
                 idList += ")";
-                conn.Close();
                 updateDemoRFIDStatus(idList);
             }
             catch (Exception ex)
@@ -52,6 +51,7 @@ namespace LIBRARY.DAL
             }
             finally
             {
+                conn.Close();
                 Console.WriteLine("finally!");
             }
             return RFIDRecordList;

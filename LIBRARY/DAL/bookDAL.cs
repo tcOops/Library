@@ -37,7 +37,7 @@ namespace LIBRARY.DAL
                     book.Publisher_name = Convert.ToString(dr["publisher_name"]);
                     book.Publisher_id = Convert.ToInt32(dr["publisher_id"]);
                     book.Publish_date = Convert.ToString(dr["publish_date"]);
-                    book.Price = Convert.ToInt32(dr["price"]);
+                    book.Price = Convert.ToString(dr["price"]);
                     book.Language = Convert.ToString(dr["language"]);
                     book.Status = Convert.ToString(dr["status"]);
                     book.Location_id = Convert.ToInt32(dr["location_id"]);
@@ -47,7 +47,6 @@ namespace LIBRARY.DAL
 
                     bookList.Add(book);
                 }
-                conn.Close();
             }
             catch (Exception ex)
             {
@@ -55,6 +54,7 @@ namespace LIBRARY.DAL
             }
             finally
             {
+                conn.Close();
                 Console.WriteLine("finally!");
             }
             return bookList;
@@ -70,7 +70,7 @@ namespace LIBRARY.DAL
             {
                 using (MySqlConnection conn = new MySqlConnection(connectString))
                 {
-                    string sql = "SELECT id, ISBN, serial_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, is_deleted, sn_code, signal_code from book where is_deleted = 0 and serial_code = {0};";
+                    string sql = "SELECT id, ISBN, serial_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, is_deleted, sn_code, signal_code from book where is_deleted = 0 and serial_code = {0} order by id desc limit 1;";
                     sql = string.Format(sql, serialCode);
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     conn.Open();
@@ -86,7 +86,7 @@ namespace LIBRARY.DAL
                         book.Publisher_name = Convert.ToString(dr["publisher_name"]);
                         book.Publisher_id = Convert.ToInt32(dr["publisher_id"]);
                         book.Publish_date = Convert.ToString(dr["publish_date"]);
-                        book.Price = Convert.ToInt32(dr["price"]);
+                        book.Price = Convert.ToString(dr["price"]);
                         book.Language = Convert.ToString(dr["language"]);
                         book.Status = Convert.ToString(dr["status"]);
                         //book.Location_id = Convert.ToInt32(dr["location_id"]);
@@ -209,7 +209,7 @@ namespace LIBRARY.DAL
                         book.Publisher_name = Convert.ToString(dr["publisher_name"]);
                         book.Publisher_id = Convert.ToInt32(dr["publisher_id"]);
                         book.Publish_date = Convert.ToString(dr["publish_date"]);
-                        book.Price = Convert.ToInt32(dr["price"]);
+                        book.Price = Convert.ToString(dr["price"]);
                         book.Language = Convert.ToString(dr["language"]);
                         book.Status = Convert.ToString(dr["status"]);
                        // book.Location_id = Convert.ToInt32(dr["location_id"]);
@@ -250,14 +250,15 @@ namespace LIBRARY.DAL
                      new MySqlParameter("?location_id", kv["location_id"]),
                      new MySqlParameter("?index_id", kv["index_id"]),
                      new MySqlParameter("?page_number", kv["page_number"]),
-                     new MySqlParameter("?is_deleted", "0")
+                     new MySqlParameter("?is_deleted", "0"),
+                     new MySqlParameter("?signal_code", kv["signal_code"])
             };
 
             try
             {
                 using (MySqlConnection conn = new MySqlConnection(connectString))
                 {
-                    string sql = "insert into book(ISBN, serial_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, location_id, index_id, page_number, is_deleted) values(?ISBN,?serial_code,?name,?author,?publisher_name,?publisher_id,?publish_date,?price,?language,?status,?location_id, ?index_id, ?page_number, ?is_deleted)";
+                    string sql = "insert into book(ISBN, serial_code, signal_code, name, author, publisher_name, publisher_id, publish_date, price, language, status, location_id, index_id, page_number, is_deleted) values(?ISBN,?serial_code, ?signal_code, ?name,?author,?publisher_name,?publisher_id,?publish_date,?price,?language,?status,?location_id, ?index_id, ?page_number, ?is_deleted)";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.Parameters.AddRange(paras);
                     conn.Open();

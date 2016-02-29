@@ -35,7 +35,6 @@ namespace LIBRARY.DAL
 
                     ClassList.Add(Class);
                 }
-                conn.Close();
             }
             catch (Exception ex)
             {
@@ -43,6 +42,7 @@ namespace LIBRARY.DAL
             }
             finally
             {
+                conn.Close();
                 Console.WriteLine("finally!");
             }
             return ClassList;

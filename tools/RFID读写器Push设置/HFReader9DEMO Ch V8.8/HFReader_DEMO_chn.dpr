@@ -1,0 +1,64 @@
+//*****************************************************************//
+//    DESCRIPTION:  大、中功率ISO15693标签读写器演示软件英文版
+//    AUTHOR: 荣睿科技
+//    VersionInfo:  V7.32
+//    DATE: 2008-9-25
+//*****************************************************************//
+
+program HFReader_DEMO_chn;
+
+{%File 'history.txt'}
+
+uses
+  Forms,
+  fHFReaderdemomain in 'fHFReaderdemomain.pas' {frmHFReaderDemoMain},
+  HFReader_Head in 'HFReader_Head.pas',
+  MultipleBlockdata in 'MultipleBlockdata.pas' {Form_Mbdata},
+  MBLOCKDATA in 'MBLOCKDATA.pas' {FrmMBlocKData},
+  Form_Help in 'Form_Help.pas' {Form_Helpshow},
+  HFReader_DLL_Head in 'HFReader_DLL_Head.pas',
+  ChangeDlg in 'ChangeDlg.pas' {ChangeIPdlg},
+  locatedlg in 'locatedlg.pas' {locateForm},
+  NhSetDlg in 'NhSetDlg.pas' {fNhSetDlg},
+  PhSetDlg in 'PhSetDlg.pas' {fPhSetDlg},
+  Setdlg in 'Setdlg.pas' {fSetdlg};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TfrmHFReaderDemoMain, frmHFReaderDemoMain);
+  Application.CreateForm(TForm_Mbdata, Form_Mbdata);
+  Application.CreateForm(TFrmMBlocKData, FrmMBlocKData);
+  Application.CreateForm(TForm_Helpshow, Form_Helpshow);
+  Application.CreateForm(TChangeIPdlg, ChangeIPdlg);
+  Application.CreateForm(TlocateForm, locateForm);
+  Application.CreateForm(TfNhSetDlg, fNhSetDlg);
+  Application.CreateForm(TfPhSetDlg, fPhSetDlg);
+  Application.CreateForm(TfSetdlg, fSetdlg);
+  Application.Run;
+end.
+{
+
+需要修改的地方有以下几个方面：
+
+1、Get System Information命令中的MemorySize是2个字节，ICrefence是一个字节。
+
+2、增加一栏“执行命令的当前读写器地址”是提示字样，
+然后框内是读写器地址，默认值是0xff，用户可以随时修改，一旦修改了，
+以后所有命令都用这个值，包括一开机点的"打开端口"。
+但是演示程序打开时的默认值是0xff。
+     
+3、"Get Reader Information"，"Write com_adr"、"set general output"、
+"get general input"、"set relay"、"open RF"、"close RF"的最长响应等待时间是100ms，
+而Inventory相关的命令的响应时间是“询查命令最大响应时间”加100ms，
+其余的命令是700ms。一共分为3类。
+     
+刚才的第三点少了一条命令，应该是：
+"Get Reader Information"，"Write com_adr"、"set general output"、
+"get general input"、"set relay"、"open RF"、"close RF"、
+"write InventoryScan time"的最长响应等待时间是100ms，
+而Inventory相关的命令的响应时间是“询查命令最大响应时间”加100ms，
+其余的命令是700ms。一共分为3类。
+}
+

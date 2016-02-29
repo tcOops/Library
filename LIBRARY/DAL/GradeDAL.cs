@@ -34,7 +34,6 @@ namespace LIBRARY.DAL
 
                     GradeList.Add(grade);
                 }
-                conn.Close();
             }
             catch (Exception ex)
             {
@@ -42,6 +41,7 @@ namespace LIBRARY.DAL
             }
             finally
             {
+                conn.Close();
                 Console.WriteLine("finally!");
             }
             return GradeList;

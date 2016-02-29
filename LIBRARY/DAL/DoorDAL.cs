@@ -44,7 +44,6 @@ namespace LIBRARY.DAL
                     doorRecordList.Add(doorRecord);
                 }
                 idList += ")";
-                conn.Close();
                 updateDemoDoorStatus(idList);
             }
             catch (Exception ex)
@@ -53,6 +52,7 @@ namespace LIBRARY.DAL
             }
             finally
             {
+                conn.Close();
                 Console.WriteLine("finally!");
             }
             return doorRecordList;
